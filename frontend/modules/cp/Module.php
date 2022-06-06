@@ -19,6 +19,7 @@ class Module extends \yii\base\Module
     {
         parent::init();
         Yii::$app->layoutPath = "@app/modules/cp/views/layouts";
+
         // custom initialization code goes here
     }
 }

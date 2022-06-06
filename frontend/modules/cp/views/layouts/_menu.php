@@ -55,16 +55,15 @@
                         <li><a href="#"><i data-feather="user"></i> Mijozlar</a></li>
                         <li><a href="#"><i data-feather="box"></i> Maxsulotlar</a>
                         </li>
-                        <li><a href="#"><i data-feather="box"></i> Maxsulotlar
-                                Turlari</a></li>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/categories'])?>"><i data-feather="box"></i> Maxsulotlar Turlari</a></li>
                         <li>
-                            <a href="#">
+                            <a href="<?= Yii::$app->urlManager->createUrl(['/cp/users'])?>">
                                 <i data-feather="users"></i>
                                 <span data-key="t-chat">Faydalunchilar</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= Yii::$app->urlManager->createUrl(['/cp/branches/index'])?>">
                                 <i data-feather="users"></i>
                                 <span data-key="t-chat">Filaillar</span>
                             </a>

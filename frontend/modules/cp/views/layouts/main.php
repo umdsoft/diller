@@ -26,11 +26,7 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
-<?php
-Breadcrumbs::widget([
-    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-])
-?>
+
 
 
 
@@ -51,6 +47,26 @@ Breadcrumbs::widget([
         <div class="page-content">
 
             <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18"><?= $this->title ?></h4>
+
+                            <div class="page-title-right">
+                                <?php
+                                echo Breadcrumbs::widget([
+                                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                                ])
+                                ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
 
 
                 <?= $content ?>
