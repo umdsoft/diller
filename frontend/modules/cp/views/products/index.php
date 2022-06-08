@@ -6,13 +6,13 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\UsersSearch */
+/* @var $searchModel common\models\search\ProductsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-index">
+<div class="products-index">
 
 
     <div class="row">
@@ -20,8 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card">
 
                 <div class="card-body p-4">
+
                     <p>
-                        <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -33,34 +34,31 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\SerialColumn'],
 
 //                            'id',
+//                            'image',
                             'name',
-                            'username',
-                            'password',
-//                            'created',
-                            //'updated',
-//                            'role_id',
+                            'count',
+                            'price',
+//                            'box',
+                            //'box_price',
+//                            'category_id',
                             [
-                                'attribute'=>'role_id',
+                                'attribute'=>'category_id',
                                 'value'=>function($d){
-                                    return $d->role->name;
+                                    return $d->category->name;
                                 },
-                                'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Roles::find()->all(),'id','name')
+                                'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->all(),'id','name')
                             ],
+                            'brand',
+                            //'description',
+                            //'code',
+                            //'bio',
+                            //'is_sale',
                             //'status',
-                            //'auth_key',
-                            //'verification_token',
-                            //'password_reset_token',
-//                            'branch_id',
-                            [
-                                'attribute'=>'branch_id',
-                                'value'=>function($d){
-                                    return $d->branch->branch_name;
-                                },
-                                'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Branches::find()->all(),'id','branch_name')
-                            ],
+                            //'created_at',
+                            //'updated_at',
                             [
                                 'class' => ActionColumn::className(),
-                                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                                'urlCreator' => function ($action,  $model, $key, $index, $column) {
                                     return Url::toRoute([$action, 'id' => $model->id]);
                                 }
                             ],
@@ -68,11 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]); ?>
                 </div>
             </div>
-        </div> <!-- end col -->
+        </div>
     </div>
-    <!-- end row -->
-
-
 
 
 

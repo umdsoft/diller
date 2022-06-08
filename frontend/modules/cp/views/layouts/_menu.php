@@ -53,7 +53,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li><a href="#"><i data-feather="user"></i> Mijozlar</a></li>
-                        <li><a href="#"><i data-feather="box"></i> Maxsulotlar</a>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/products'])?>"><i data-feather="box"></i> Maxsulotlar</a>
                         </li>
                         <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/categories'])?>"><i data-feather="box"></i> Maxsulotlar Turlari</a></li>
                         <li>

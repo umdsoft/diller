@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'box_price')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->all(),'id','name')) ?>
 
     <?= $form->field($model, 'brand')->textInput() ?>
 
@@ -34,13 +34,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'bio')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_sale')->textInput() ?>
+    <?= $form->field($model, 'is_sale')->dropDownList( Yii::$app->params['is_sale'] ) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(Yii::$app->params['status']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

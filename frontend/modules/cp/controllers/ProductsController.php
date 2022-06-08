@@ -7,7 +7,8 @@ use common\models\search\ProductsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
+use Yii;
 /**
  * ProductsController implements the CRUD actions for Products model.
  */
@@ -70,8 +71,15 @@ class ProductsController extends Controller
         $model = new Products();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                if($model->image = UploadedFile::getInstance($model,'image')){
+                    $name = microtime(true).'.'.$model->image->extension;
+                    $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                    $model->image = $name;
+                }
+                if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -92,8 +100,18 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        $old = $model->image;
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if($model->image = UploadedFile::getInstance($model,'image')){
+                $name = microtime(true).'.'.$model->image->extension;
+                $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                $model->image = $name;
+            }else{
+                $model->image = $old;
+            }
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
