@@ -2,6 +2,7 @@
 
 namespace frontend\modules\cp\controllers;
 
+use common\models\ProductImages;
 use common\models\Products;
 use common\models\search\ProductsSearch;
 use yii\web\Controller;
@@ -56,6 +57,17 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
+        if ($this->request->isPost){
+            $model = new ProductImages();
+        }
+            if ($model->load($this->request->post())) {
+                if($model->image = UploadedFile::getInstance($model,'image')){
+                    $name = microtime(true).'.'.$model->image->extension;
+                    $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                    $model->image = $name;
+                    $model->save();
+                }
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

@@ -1,15 +1,19 @@
 <?php
 
+use common\models\ProductImages;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Products */
+///* @var $model1 common\models\ProductImages */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+
 ?>
 <div class="products-view">
 
@@ -46,6 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
         ],
+    ]) ?>
+    <?= $this->render('_image_form', [
+        'model' => $model,
     ]) ?>
 
 </div>
