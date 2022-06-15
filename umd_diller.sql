@@ -174,7 +174,7 @@ INSERT INTO `roles` (`id`, `name`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `suppliers`
+-- Table structure for table `supplier`
 --
 
 CREATE TABLE `suppliers` (
@@ -267,7 +267,7 @@ ALTER TABLE `roles`
   ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`url`);
 
 --
--- Indexes for table `suppliers`
+-- Indexes for table `supplier`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`id`);
@@ -316,7 +316,7 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `suppliers`
+-- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `suppliers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
