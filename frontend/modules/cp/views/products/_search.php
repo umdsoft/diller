@@ -19,21 +19,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'image') ?>
 
+    <?= $form->field($model, 'serial') ?>
+
+    <?= $form->field($model, 'serial_num') ?>
+
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'count') ?>
-
-    <?= $form->field($model, 'price') ?>
+    <?php // echo $form->field($model, 'price') ?>
 
     <?php // echo $form->field($model, 'box') ?>
-
-    <?php // echo $form->field($model, 'box_price') ?>
 
     <?php // echo $form->field($model, 'category_id') ?>
 
     <?php // echo $form->field($model, 'brand') ?>
 
-    <?php // echo $form->field($model, 'description') ?>
+    <?php // echo $form->field($model, 'note') ?>
 
     <?php // echo $form->field($model, 'code') ?>
 
@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'is_sale') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'status_id') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

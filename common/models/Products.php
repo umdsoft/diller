@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Behat\Transliterator\Transliterator;
 use Yii;
 
 /**
@@ -9,23 +10,22 @@ use Yii;
  *
  * @property int $id
  * @property string $image
+ * @property string|null $serial
+ * @property int|null $serial_num
  * @property string $name
- * @property int $count
  * @property int $price
  * @property int $box
- * @property int $box_price
  * @property int $category_id
  * @property int $brand
- * @property string|null $description
+ * @property string|null $note
  * @property string $code
  * @property string|null $bio
  * @property int $is_sale
- * @property int $status
  * @property string|null $created_at
  * @property string|null $updated_at
  *
  * @property Categories $category
- * @property OrderProducts[] $orderProducts
+ * @property IncomeProducts[] $incomeProducts
  * @property ProductImages $productImages
  */
 class Products extends \yii\db\ActiveRecord
@@ -44,10 +44,10 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'count', 'price', 'box', 'box_price', 'category_id', 'brand', 'code'], 'required'],
-            [['count', 'price', 'box', 'box_price', 'category_id', 'brand', 'is_sale', 'status'], 'integer'],
+            [['serial','name', 'price', 'box', 'category_id', 'brand'], 'required'],
+            [['serial_num','serial', 'price', 'box', 'category_id', 'brand', 'is_sale', ], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['image', 'name', 'description', 'code', 'bio'], 'string', 'max' => 255],
+            [['image', 'serial', 'name', 'note', 'code', 'bio'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
@@ -59,21 +59,20 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'image' => 'Image',
-            'name' => 'Name',
-            'count' => 'Count',
-            'price' => 'Price',
-            'box' => 'Box',
-            'box_price' => 'Box Price',
-            'category_id' => 'Category ID',
-            'brand' => 'Brand',
-            'description' => 'Description',
-            'code' => 'Code',
+            'image' => 'Rasm',
+            'serial' => 'Seriya',
+            'serial_num' => 'Seriya raqami',
+            'name' => 'Nomi',
+            'price' => 'Narxi',
+            'box' => 'Karopkadagi soni',
+            'category_id' => 'Kategoriyasi',
+            'brand' => 'Brend',
+            'note' => 'Izoh',
+            'code' => 'Kod',
             'bio' => 'Bio',
-            'is_sale' => 'Is Sale',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_sale' => 'Sotuvda mavjudligi',
+            'created_at' => 'Yaratildi',
+            'updated_at' => 'O`zgartirildi',
         ];
     }
 
@@ -87,14 +86,17 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
     }
 
+    public function slug(){
+        $this->code = Transliterator::transliterate($this->name);
+    }
     /**
-     * Gets query for [[OrderProducts]].
+     * Gets query for [[IncomeProducts]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrderProducts()
+    public function getIncomeProducts()
     {
-        return $this->hasMany(OrderProducts::className(), ['product_id' => 'id']);
+        return $this->hasMany(IncomeProducts::className(), ['product_id' => 'id']);
     }
 
     /**

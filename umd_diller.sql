@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Время создания: Июн 25 2022 г., 18:26
--- Версия сервера: 10.4.24-MariaDB
--- Версия PHP: 7.4.29
+-- Host: 127.0.0.1
+-- Generation Time: Jul 02, 2022 at 05:19 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `umd_diller`
+-- Database: `umd_diller`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `branches`
+-- Table structure for table `branches`
 --
 
 CREATE TABLE `branches` (
@@ -45,16 +45,16 @@ CREATE TABLE `branches` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `branches`
+-- Dumping data for table `branches`
 --
 
 INSERT INTO `branches` (`id`, `branch_name`, `contracgen_name`, `leader`, `alternative_name`, `status`, `responsible`, `code`, `number`, `inn`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'Asosiy', 'asosiy', 'Bunyod', 'asosiy', 1, 'Bunyod', 1, 1, 123456789, 998999670395, '-', NULL, NULL);
+(1, 'Asosiy', 'asosiy', 'Bunyod', 'asosiy', 1, 'Bunyod', 1, 1, 123456789, 998999670395, '-', '2022-07-02 13:44:47', '2022-07-03 13:44:55');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -62,10 +62,17 @@ CREATE TABLE `categories` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Ichimliklar');
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `income`
+-- Table structure for table `income`
 --
 
 CREATE TABLE `income` (
@@ -82,7 +89,7 @@ CREATE TABLE `income` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `income_products`
+-- Table structure for table `income_products`
 --
 
 CREATE TABLE `income_products` (
@@ -100,7 +107,7 @@ CREATE TABLE `income_products` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `income_status`
+-- Table structure for table `income_status`
 --
 
 CREATE TABLE `income_status` (
@@ -111,7 +118,7 @@ CREATE TABLE `income_status` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `loc_district`
+-- Table structure for table `loc_district`
 --
 
 CREATE TABLE `loc_district` (
@@ -121,7 +128,7 @@ CREATE TABLE `loc_district` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tumanlar';
 
 --
--- Дамп данных таблицы `loc_district`
+-- Dumping data for table `loc_district`
 --
 
 INSERT INTO `loc_district` (`id`, `name`, `region_id`) VALUES
@@ -329,7 +336,7 @@ INSERT INTO `loc_district` (`id`, `name`, `region_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `loc_region`
+-- Table structure for table `loc_region`
 --
 
 CREATE TABLE `loc_region` (
@@ -338,7 +345,7 @@ CREATE TABLE `loc_region` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Viloyatlar';
 
 --
--- Дамп данных таблицы `loc_region`
+-- Dumping data for table `loc_region`
 --
 
 INSERT INTO `loc_region` (`id`, `name`) VALUES
@@ -360,7 +367,7 @@ INSERT INTO `loc_region` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -377,7 +384,6 @@ CREATE TABLE `products` (
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_sale` int(11) NOT NULL DEFAULT 1,
-  `status_id` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -385,7 +391,7 @@ CREATE TABLE `products` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_images`
+-- Table structure for table `product_images`
 --
 
 CREATE TABLE `product_images` (
@@ -396,7 +402,7 @@ CREATE TABLE `product_images` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -406,7 +412,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB AVG_ROW_LENGTH=5461 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `url`) VALUES
@@ -420,7 +426,7 @@ INSERT INTO `roles` (`id`, `name`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `suppliers`
+-- Table structure for table `suppliers`
 --
 
 CREATE TABLE `suppliers` (
@@ -442,7 +448,7 @@ CREATE TABLE `suppliers` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -462,7 +468,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AVG_ROW_LENGTH=8192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `phone`, `created`, `updated`, `role_id`, `status`, `auth_key`, `verification_token`, `password_reset_token`, `branch_id`) VALUES
@@ -471,7 +477,7 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `phone`, `created`, `
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `warehouse`
+-- Table structure for table `warehouse`
 --
 
 CREATE TABLE `warehouse` (
@@ -482,23 +488,23 @@ CREATE TABLE `warehouse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='skladlar';
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `branches`
+-- Indexes for table `branches`
 --
 ALTER TABLE `branches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `income`
+-- Indexes for table `income`
 --
 ALTER TABLE `income`
   ADD PRIMARY KEY (`id`),
@@ -508,7 +514,7 @@ ALTER TABLE `income`
   ADD KEY `FK_income_warehouse_id` (`warehouse_id`);
 
 --
--- Индексы таблицы `income_products`
+-- Indexes for table `income_products`
 --
 ALTER TABLE `income_products`
   ADD PRIMARY KEY (`id`),
@@ -516,52 +522,52 @@ ALTER TABLE `income_products`
   ADD KEY `FK_income_products_income_id` (`income_id`);
 
 --
--- Индексы таблицы `income_status`
+-- Indexes for table `income_status`
 --
 ALTER TABLE `income_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `loc_district`
+-- Indexes for table `loc_district`
 --
 ALTER TABLE `loc_district`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_district_region_id` (`region_id`);
 
 --
--- Индексы таблицы `loc_region`
+-- Indexes for table `loc_region`
 --
 ALTER TABLE `loc_region`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_category_id_foreign` (`category_id`);
 
 --
--- Индексы таблицы `product_images`
+-- Indexes for table `product_images`
 --
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Индексы таблицы `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`url`);
 
 --
--- Индексы таблицы `suppliers`
+-- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -570,94 +576,94 @@ ALTER TABLE `users`
   ADD KEY `FK_users_branch_id` (`branch_id`);
 
 --
--- Индексы таблицы `warehouse`
+-- Indexes for table `warehouse`
 --
 ALTER TABLE `warehouse`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_warehouse_branch_id` (`branch_id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `branches`
+-- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `income`
+-- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `income_products`
+-- AUTO_INCREMENT for table `income_products`
 --
 ALTER TABLE `income_products`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `income_status`
+-- AUTO_INCREMENT for table `income_status`
 --
 ALTER TABLE `income_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `loc_district`
+-- AUTO_INCREMENT for table `loc_district`
 --
 ALTER TABLE `loc_district`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 
 --
--- AUTO_INCREMENT для таблицы `loc_region`
+-- AUTO_INCREMENT for table `loc_region`
 --
 ALTER TABLE `loc_region`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT для таблицы `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT для таблицы `suppliers`
+-- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `warehouse`
+-- AUTO_INCREMENT for table `warehouse`
 --
 ALTER TABLE `warehouse`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения внешнего ключа таблицы `income`
+-- Constraints for table `income`
 --
 ALTER TABLE `income`
   ADD CONSTRAINT `FK_income_status_id` FOREIGN KEY (`status_id`) REFERENCES `income_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -666,39 +672,39 @@ ALTER TABLE `income`
   ADD CONSTRAINT `FK_income_warehouse_id` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ограничения внешнего ключа таблицы `income_products`
+-- Constraints for table `income_products`
 --
 ALTER TABLE `income_products`
   ADD CONSTRAINT `FK_income_products_income_id` FOREIGN KEY (`income_id`) REFERENCES `income` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_income_products_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ограничения внешнего ключа таблицы `loc_district`
+-- Constraints for table `loc_district`
 --
 ALTER TABLE `loc_district`
   ADD CONSTRAINT `FK_district_region_id` FOREIGN KEY (`region_id`) REFERENCES `loc_region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ограничения внешнего ключа таблицы `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `product_images`
+-- Constraints for table `product_images`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `FK_product_images_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ограничения внешнего ключа таблицы `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `FK_users_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `users_sklad_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 
 --
--- Ограничения внешнего ключа таблицы `warehouse`
+-- Constraints for table `warehouse`
 --
 ALTER TABLE `warehouse`
   ADD CONSTRAINT `FK_warehouse_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

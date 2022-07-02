@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\ProductsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = 'Mahsulotlar ro`yhati';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="products-index">
@@ -22,10 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body p-4">
 
                     <p>
-                        <?= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('Mahsulot qo`shish', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
 
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
@@ -35,12 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //                            'id',
 //                            'image',
+                            'serial',
+//                            'serial_num',
                             'name',
-                            'count',
                             'price',
-//                            'box',
-                            //'box_price',
-//                            'category_id',
+                            //'box',
                             [
                                 'attribute'=>'category_id',
                                 'value'=>function($d){
@@ -49,21 +49,29 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->all(),'id','name')
                             ],
                             'brand',
-                            //'description',
+                            //'note',
                             //'code',
                             //'bio',
-                            //'is_sale',
-                            //'status',
-                            //'created_at',
+//                            'is_sale',
+                            [
+                                'attribute'=>'is_sale',
+                                'value'=>function($d){
+                                    return Yii::$app->params['is_sale'][$d->is_sale];
+                                },
+                                'filter'=>Yii::$app->params['is_sale']
+                            ],
+                            //'status_id',
+                            'created_at',
                             //'updated_at',
                             [
                                 'class' => ActionColumn::className(),
-                                'urlCreator' => function ($action,  $model, $key, $index, $column) {
+                                'urlCreator' => function ($action, $model, $key, $index, $column) {
                                     return Url::toRoute([$action, 'id' => $model->id]);
                                 }
                             ],
                         ],
                     ]); ?>
+
                 </div>
             </div>
         </div>

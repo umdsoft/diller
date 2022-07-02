@@ -49,6 +49,16 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function actionGetserial(){
+        $serial = Products::find()->max('serial_num');
+        if($serial and $serial>100000000000000000){
+            $serial ++;
+        }else{
+            $serial = 100000000000000000;
+        }
+        return $serial;
+    }
+
     /**
      * Displays a single Products model.
      * @param string $id ID
@@ -81,9 +91,9 @@ class ProductsController extends Controller
     public function actionCreate()
     {
         $model = new Products();
-
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
+                $model->slug();
                 if($model->image = UploadedFile::getInstance($model,'image')){
                     $name = microtime(true).'.'.$model->image->extension;
                     $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
@@ -121,6 +131,7 @@ class ProductsController extends Controller
             }else{
                 $model->image = $old;
             }
+            $model->slug();
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }

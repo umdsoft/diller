@@ -22,9 +22,8 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  *
- * @property Orders[] $orders
- * @property Products[] $products
  * @property Users[] $users
+ * @property Warehouse[] $warehouses
  */
 class Branches extends \yii\db\ActiveRecord
 {
@@ -42,7 +41,7 @@ class Branches extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['branch_name', 'contracgen_name', 'leader', 'alternative_name', 'status', 'responsible', 'code', 'number', 'address'], 'required'],
+            [['branch_name', 'contracgen_name', 'leader', 'alternative_name', 'responsible', 'code', 'number', 'address'], 'required'],
             [['status', 'code', 'number', 'inn', 'phone'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['branch_name', 'contracgen_name', 'leader', 'alternative_name', 'responsible', 'address'], 'string', 'max' => 255],
@@ -57,39 +56,19 @@ class Branches extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'branch_name' => 'Filial nomi',
-            'contracgen_name' => 'Qisqartma nomi',
+            'contracgen_name' => 'Kontragen nomi',
             'leader' => 'Rahbar',
-            'alternative_name' => 'Alternative nom',
+            'alternative_name' => 'Alternativ nomi',
             'status' => 'Status',
-            'responsible' => 'Javobgar',
+            'responsible' => 'Mas`ul',
             'code' => 'Kod',
-            'number' => 'Raqami',
+            'number' => 'Raqam',
             'inn' => 'STIR(INN)',
-            'phone' => 'Telefon raqami',
+            'phone' => 'Telefon',
             'address' => 'Manzil',
             'created_at' => 'Yaratildi',
             'updated_at' => 'O`zgartirildi',
         ];
-    }
-
-    /**
-     * Gets query for [[Orders]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOrders()
-    {
-        return $this->hasMany(Orders::className(), ['sklad_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Products]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProducts()
-    {
-        return $this->hasMany(Products::className(), ['sklad_id' => 'id']);
     }
 
     /**
@@ -100,5 +79,15 @@ class Branches extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(Users::className(), ['branch_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Warehouses]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWarehouses()
+    {
+        return $this->hasMany(Warehouse::className(), ['branch_id' => 'id']);
     }
 }

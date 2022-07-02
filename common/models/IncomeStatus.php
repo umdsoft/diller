@@ -5,21 +5,21 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "income_status".
  *
  * @property int $id
  * @property string $name
  *
- * @property Products[] $products
+ * @property Income[] $incomes
  */
-class Categories extends \yii\db\ActiveRecord
+class IncomeStatus extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'categories';
+        return 'income_status';
     }
 
     /**
@@ -28,8 +28,7 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 50],
         ];
     }
 
@@ -45,12 +44,12 @@ class Categories extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Products]].
+     * Gets query for [[Incomes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProducts()
+    public function getIncomes()
     {
-        return $this->hasMany(Products::className(), ['category_id' => 'id']);
+        return $this->hasMany(Income::className(), ['status_id' => 'id']);
     }
 }

@@ -9,8 +9,11 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $branch_id
+ * @property int $branch_id
  * @property int|null $is_full
+ *
+ * @property Branches $branch
+ * @property Income[] $incomes
  */
 class Warehouse extends \yii\db\ActiveRecord
 {
@@ -28,8 +31,10 @@ class Warehouse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_full'], 'integer'],
-            [['name', 'branch_id'], 'string', 'max' => 255],
+            [['branch_id'], 'required'],
+            [['branch_id', 'is_full'], 'integer'],
+            [['name'], 'string', 'max' => 255],
+            [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branches::className(), 'targetAttribute' => ['branch_id' => 'id']],
         ];
     }
 
@@ -40,9 +45,29 @@ class Warehouse extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'branch_id' => 'Branch ID',
-            'is_full' => 'Is Full',
+            'name' => 'Sklad nomi',
+            'branch_id' => 'Filial nomi',
+            'is_full' => 'To`lgan',
         ];
+    }
+
+    /**
+     * Gets query for [[Branch]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBranch()
+    {
+        return $this->hasOne(Branches::className(), ['id' => 'branch_id']);
+    }
+
+    /**
+     * Gets query for [[Incomes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncomes()
+    {
+        return $this->hasMany(Income::className(), ['warehouse_id' => 'id']);
     }
 }

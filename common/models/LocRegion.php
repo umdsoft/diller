@@ -5,21 +5,21 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "loc_region".
  *
  * @property int $id
  * @property string $name
  *
- * @property Products[] $products
+ * @property LocDistrict[] $locDistricts
  */
-class Categories extends \yii\db\ActiveRecord
+class LocRegion extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'categories';
+        return 'loc_region';
     }
 
     /**
@@ -28,7 +28,6 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -40,17 +39,17 @@ class Categories extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Nomi',
+            'name' => 'Viloyat',
         ];
     }
 
     /**
-     * Gets query for [[Products]].
+     * Gets query for [[LocDistricts]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProducts()
+    public function getLocDistricts()
     {
-        return $this->hasMany(Products::className(), ['category_id' => 'id']);
+        return $this->hasMany(LocDistrict::className(), ['region_id' => 'id']);
     }
 }

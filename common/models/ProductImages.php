@@ -42,8 +42,8 @@ class ProductImages extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'image' => 'Image',
+            'product_id' => 'Mahsulot raqami',
+            'image' => 'Rasm',
         ];
     }
 

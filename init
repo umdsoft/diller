@@ -312,7 +312,7 @@ function ansiColorsSupported()
 }
 
 /**
- * Get ANSI code of style.
+ * GetArray ANSI code of style.
  * @param string $name style name
  * @return integer ANSI code of style.
  */

@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $username
  * @property string $password
+ * @property string|null $phone
  * @property string|null $created
  * @property string|null $updated
  * @property int|null $role_id
@@ -18,11 +19,10 @@ use Yii;
  * @property string|null $auth_key
  * @property string|null $verification_token
  * @property string|null $password_reset_token
- * @property int|null $branch_id
+ * @property int $branch_id
  *
  * @property Branches $branch
- * @property Orders[] $orders
- * @property Orders[] $orders0
+ * @property Income[] $incomes
  * @property Roles $role
  */
 class Users extends \yii\db\ActiveRecord
@@ -41,11 +41,11 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'username', 'password'], 'required'],
+            [['name', 'username', 'password', 'branch_id'], 'required'],
             [['created', 'updated'], 'safe'],
             [['role_id', 'status', 'branch_id'], 'integer'],
-            [['name', 'username', 'password'], 'string', 'max' => 255],
-            [['auth_key', 'verification_token', 'password_reset_token'], 'string', 'max' => 500],
+            [['name', 'username', 'phone'], 'string', 'max' => 255],
+            [['password', 'auth_key', 'verification_token', 'password_reset_token'], 'string', 'max' => 500],
             [['username'], 'unique'],
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branches::className(), 'targetAttribute' => ['branch_id' => 'id']],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['role_id' => 'id']],
@@ -62,14 +62,15 @@ class Users extends \yii\db\ActiveRecord
             'name' => 'FIO',
             'username' => 'Login',
             'password' => 'Parol',
+            'phone' => 'Telefon raqami',
             'created' => 'Yaratildi',
             'updated' => 'O`zgartirildi',
-            'role_id' => 'Huquqi',
+            'role_id' => 'Roli',
             'status' => 'Status',
             'auth_key' => 'Auth Key',
             'verification_token' => 'Verification Token',
             'password_reset_token' => 'Password Reset Token',
-            'branch_id' => 'Filial',
+            'branch_id' => 'Filial raqami',
         ];
     }
 
@@ -84,23 +85,13 @@ class Users extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Orders]].
+     * Gets query for [[Incomes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrders()
+    public function getIncomes()
     {
-        return $this->hasMany(Orders::className(), ['kuryer_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Orders0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOrders0()
-    {
-        return $this->hasMany(Orders::className(), ['user_id' => 'id']);
+        return $this->hasMany(Income::className(), ['user_id' => 'id']);
     }
 
     /**

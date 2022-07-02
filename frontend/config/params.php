@@ -6,7 +6,7 @@ return [
         0=>'Deaktiv'
     ],
     'is_sale'=>[
-        1=> 'Sotuvda mavjud emas',
-        0=> 'Sotuvda bor'
+        1=> 'Sotuvda bor',
+        0=> 'Sotuvda mavjud emas'
     ]
 ];

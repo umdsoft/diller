@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                 <div class="card-body p-4">
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
                     <p>
                         <?= Html::a('Filial qo`shish', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
@@ -33,19 +32,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
+                            'code',
                             'branch_name',
                             'contracgen_name',
                             'leader',
                             'alternative_name',
 
-                            //'responsible',
-                            //'code',
+                            'responsible',
+
 //            'number',
                             'inn',
                             'phone',
                             //'status',
                             //'address',
                             'created_at',
+                            [
+                                'attribute'=>'status',
+                                'value'=>function($d){
+                                    return Yii::$app->params['status'][$d->status];
+                                }
+                            ],
                             //'updated_at',
                             [
                                 'class' => ActionColumn::className(),

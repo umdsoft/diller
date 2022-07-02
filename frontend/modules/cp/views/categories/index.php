@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\CategoriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Mahsulot turlari';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="categories-index">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="card-body p-4">
                     <p>
-                        <?= Html::a('Create Categories', ['create'], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('Mahsulot turi qo`shish', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
-                            'id',
+//                            'id',
                             'name',
                             [
                                 'class' => ActionColumn::className(),

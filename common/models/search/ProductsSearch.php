@@ -17,8 +17,8 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'count', 'price', 'box', 'box_price', 'category_id', 'brand', 'is_sale', 'status'], 'integer'],
-            [['image', 'name', 'description', 'code', 'bio', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'serial_num', 'price', 'box', 'category_id', 'brand', 'is_sale', ], 'integer'],
+            [['image', 'serial', 'name', 'note', 'code', 'bio', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -59,21 +59,20 @@ class ProductsSearch extends Products
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'count' => $this->count,
+            'serial_num' => $this->serial_num,
             'price' => $this->price,
             'box' => $this->box,
-            'box_price' => $this->box_price,
             'category_id' => $this->category_id,
             'brand' => $this->brand,
             'is_sale' => $this->is_sale,
-            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'serial', $this->serial])
             ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'note', $this->note])
             ->andFilterWhere(['like', 'code', $this->code])
             ->andFilterWhere(['like', 'bio', $this->bio]);
 

@@ -5,15 +5,25 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Products */
 
-$this->title = 'Create Products';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = 'Mahsulot qo`shish';
+$this->params['breadcrumbs'][] = ['label' => 'Mahsulotlar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="products-create">
 
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
 
+                <div class="card-body p-4">
+
+                    <?= $this->render('_form', [
+                        'model' => $model,
+                    ]) ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

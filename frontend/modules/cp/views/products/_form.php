@@ -12,36 +12,78 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'serial',['template'=>
+                "{label}\n<div class=\"input-group\">{input}\n<span class=\"input-group-btn\"><button class=\"btn btn-outline-primary getserialnum\" type=\"button\"><span class=\"fa fa-random\" aria-hidden=\"true\"></span></button></span></div>\n{hint}\n{error}"
+            ])->textInput(['maxlength' => true, "aria-describedby"=>"basic-addon2"]) ?>
 
-    <?= $form->field($model, 'count')->textInput() ?>
 
-    <?= $form->field($model, 'price')->textInput() ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'box')->textInput() ?>
+            <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'box_price')->textInput() ?>
+            <?= $form->field($model, 'box')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->all(),'id','name')) ?>
+            <?= $form->field($model, 'brand')->textInput() ?>
 
-    <?= $form->field($model, 'brand')->textInput() ?>
+        </div>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'category_id')->dropDownList(\frontend\components\GetArray::Category(),['prompt'=>'Mahsulot turini tanlang']) ?>
 
-    <?= $form->field($model, 'bio')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'is_sale')->dropDownList(Yii::$app->params['is_sale']) ?>
 
-    <?= $form->field($model, 'is_sale')->dropDownList( Yii::$app->params['is_sale'] ) ?>
+            <?= $form->field($model, 'bio')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Yii::$app->params['status']) ?>
+            <?= $form->field($model, 'note')->textInput(['maxlength' => true]) ?>
+
+            <div class="form-group">
+                <label for="products-image">
+                    <img src="/upload/<?= $model->isNewRecord ? 'default.jpg' : $model->image?>" id="blah" style="height:200px; width:auto;">
+                </label>
+            </div>
+
+            <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
+
+
+        </div>
+    </div>
+
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+<?php
+$url = Yii::$app->urlManager->createUrl(['/cp/products/getserial']);
+$this->registerJs("
+    $('.getserialnum').click(function(){
+        $.get('{$url}').done(function(data){
+            $('#products-serial').val(data);
+        })
+    });
+    function readURL(input) {
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+              $('#blah').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+        $('#products-image').change(function() {
+          readURL(this);
+        });
+")
+?>

@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "supplier".
+ * This is the model class for table "suppliers".
  *
  * @property int $id
  * @property string $name
@@ -20,6 +20,8 @@ use Yii;
  * @property string|null $nds_num
  * @property string|null $created_at
  * @property string|null $updated_at
+ *
+ * @property Income[] $incomes
  */
 class Suppliers extends \yii\db\ActiveRecord
 {
@@ -50,18 +52,28 @@ class Suppliers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'inn' => 'Inn',
-            'oked' => 'Oked',
-            'okonx' => 'Okonx',
-            'address' => 'Address',
-            'phone' => 'Phone',
-            'director' => 'Director',
+            'name' => 'Nomi',
+            'inn' => 'STIR(INN)',
+            'oked' => 'OKED',
+            'okonx' => 'OKONX',
+            'address' => 'Manzil',
+            'phone' => 'Telefon raqami',
+            'director' => 'Rahbar',
             'buxgalter' => 'Buxgalter',
-            'phone_bux' => 'Phone Bux',
-            'nds_num' => 'Nds Num',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'phone_bux' => 'Buxgalter raqami',
+            'nds_num' => 'NDS raqami',
+            'created_at' => 'Yaratildi',
+            'updated_at' => 'O`zgartirildi',
         ];
+    }
+
+    /**
+     * Gets query for [[Incomes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncomes()
+    {
+        return $this->hasMany(Income::className(), ['supplier_id' => 'id']);
     }
 }

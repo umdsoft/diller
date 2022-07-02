@@ -1,0 +1,12 @@
+.has-error label, .has-error .help-block{
+    color:red;
+}
+.has-error input{
+    border: red solid 1px;
+}
+.has-success label, .has-success .help-block{
+    color:#34c38f;
+}
+.has-success input{
+    border: #34c38f solid 1px;
+}

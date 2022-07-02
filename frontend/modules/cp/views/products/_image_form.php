@@ -18,8 +18,6 @@ $model1=new ProductImages();
 
     <?= $form->field($model1, 'product_id')->hiddenInput(['value'=> $model->id])->label(false) ?>
 
-
-
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
