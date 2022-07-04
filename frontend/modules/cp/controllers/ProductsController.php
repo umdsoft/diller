@@ -51,11 +51,11 @@ class ProductsController extends Controller
     }
 
     public function actionGetserial(){
-        $serial = Products::find()->max('serial_num');
-        if($serial and $serial>100000000000000000){
+        $serial = Products::find()->max('serial');
+        if($serial and $serial>=100000000000000){
             $serial ++;
         }else{
-            $serial = 100000000000000000;
+            $serial = 100000000000000;
         }
         return $serial;
     }
@@ -97,6 +97,7 @@ class ProductsController extends Controller
                 }else{
                     $brand = new Brand();
                     $brand->name = $model->brand_name;
+                    $brand->category_id = $model->category_id;
                     $brand->slug();
                     $brand->save();
                     $model->brand_id = $brand->id;
@@ -132,6 +133,16 @@ class ProductsController extends Controller
                 $model->image = $name;
             }else{
                 $model->image = $old;
+            }
+            if($brand = Brand::findOne(['name'=>$model->brand_name])){
+                $model->brand_id = $brand->id;
+            }else{
+                $brand = new Brand();
+                $brand->name = $model->brand_name;
+                $brand->category_id = $model->category_id;
+                $brand->slug();
+                $brand->save();
+                $model->brand_id = $brand->id;
             }
             $model->slug();
             if($model->save()){

@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= Yii::$app->urlManager->createUrl(['/cp/supplier'])?>">
                                 <i data-feather="bar-chart"></i>
                                 <span data-key="t-chat">Yetkazib beruvchilar</span>
                             </a>

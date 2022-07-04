@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'supplier';
+$this->title = 'Yetkazib beruvchilar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index">
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="card-body p-4">
                     <p>
-                        <?= Html::a('Create supplier', ['create'], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('Yetkazib beruvchi qo`shish', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -66,10 +66,5 @@ $this->params['breadcrumbs'][] = $this->title;
         </div> <!-- end col -->
     </div>
     <!-- end row -->
-
-
-
-
-
 
 </div>

@@ -12,6 +12,8 @@ use Yii;
  * @property string $name
  * @property string $code
  * @property string $image
+ * @property int $category_id
+ * @property Categories $category
  */
 class Brand extends \yii\db\ActiveRecord
 {
@@ -43,8 +45,13 @@ class Brand extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Nomi',
             'code' => 'Kod',
+            'category_id' => 'Turi',
             'image' => 'Rasm',
         ];
+    }
+
+    public function getCategory(){
+        return $this->hasOne(Categories::className(),['id'=>'category_id']);
     }
 
     public function slug(){
