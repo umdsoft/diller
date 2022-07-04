@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 ///* @var $model1 common\models\ProductImages */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Mahsulotlar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
@@ -17,11 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="products-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('O`zgartirish', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('O`chirish', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -34,25 +32,47 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'image',
+//            'image',
+            [
+                'attribute'=>'image',
+                'value'=>function($d){
+                    return "<img src='/upload/{$d->image}'>";
+                },
+                'format'=>'raw'
+            ],
             'name',
             'count',
             'price',
             'box',
-            'box_price',
-            'category_id',
-            'brand',
+//            'box_price',
+//            'category_id',
+            [
+                'attribute'=>'category_id',
+                'value'=>function($d){
+                    return $d->category->name;
+                }
+            ],
+//            'brand',
+            [
+                'attribute'=>'brand_id',
+                'value'=>function($d){
+                    return $d->brand->name;
+                }
+            ],
             'description',
             'code',
             'bio',
-            'is_sale',
-            'status',
+//            'is_sale',
+            [
+                'attribute'=>'is_sale',
+                'value'=>function($d){
+                    return Yii::$app->params['is_sale'][$d->is_sale];
+                }
+            ],
+//            'status',
             'created_at',
             'updated_at',
         ],
-    ]) ?>
-    <?= $this->render('_image_form', [
-        'model' => $model,
     ]) ?>
 
 </div>

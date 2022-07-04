@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                                 'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->all(),'id','name')
                             ],
-                            'brand',
+                            'brand_id',
                             //'note',
                             //'code',
                             //'bio',

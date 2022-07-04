@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'box')->textInput() ?>
 
-            <?= $form->field($model, 'brand')->textInput() ?>
+            <?= $form->field($model, 'brand_name')->textInput() ?>
 
         </div>
         <div class="col-md-6">

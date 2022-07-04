@@ -2,6 +2,7 @@
 
 namespace frontend\modules\cp\controllers;
 
+use common\models\Brand;
 use common\models\ProductImages;
 use common\models\Products;
 use common\models\search\ProductsSearch;
@@ -67,17 +68,7 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
-        if ($this->request->isPost){
-            $model = new ProductImages();
-        }
-            if ($model->load($this->request->post())) {
-                if($model->image = UploadedFile::getInstance($model,'image')){
-                    $name = microtime(true).'.'.$model->image->extension;
-                    $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
-                    $model->image = $name;
-                    $model->save();
-                }
-        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -98,6 +89,17 @@ class ProductsController extends Controller
                     $name = microtime(true).'.'.$model->image->extension;
                     $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
                     $model->image = $name;
+                }else{
+                    $model->image = "default.jpg";
+                }
+                if($brand = Brand::findOne(['name'=>$model->brand_name])){
+                    $model->brand_id = $brand->id;
+                }else{
+                    $brand = new Brand();
+                    $brand->name = $model->brand_name;
+                    $brand->slug();
+                    $brand->save();
+                    $model->brand_id = $brand->id;
                 }
                 if($model->save()){
                     return $this->redirect(['view', 'id' => $model->id]);

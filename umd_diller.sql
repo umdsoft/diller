@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2022 at 05:19 PM
+-- Generation Time: Jul 04, 2022 at 03:53 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.18
 
@@ -50,6 +50,26 @@ CREATE TABLE `branches` (
 
 INSERT INTO `branches` (`id`, `branch_name`, `contracgen_name`, `leader`, `alternative_name`, `status`, `responsible`, `code`, `number`, `inn`, `phone`, `address`, `created_at`, `updated_at`) VALUES
 (1, 'Asosiy', 'asosiy', 'Bunyod', 'asosiy', 1, 'Bunyod', 1, 1, 123456789, 998999670395, '-', '2022-07-02 13:44:47', '2022-07-03 13:44:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`id`, `name`, `code`, `image`) VALUES
+(1, 'test', 'test', NULL);
 
 -- --------------------------------------------------------
 
@@ -379,14 +399,21 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `box` int(11) NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
-  `brand` int(10) UNSIGNED NOT NULL,
+  `brand_id` int(11) NOT NULL,
   `note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_sale` int(11) NOT NULL DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `image`, `serial`, `serial_num`, `name`, `price`, `box`, `category_id`, `brand_id`, `note`, `code`, `bio`, `is_sale`, `created_at`, `updated_at`) VALUES
+(1, 'default.jpg', '100000000000000000', 0, '4324', 234234, 234, 1, 1, '234', '4324', '234', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -498,6 +525,14 @@ ALTER TABLE `branches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
@@ -545,7 +580,8 @@ ALTER TABLE `loc_region`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `products_category_id_foreign` (`category_id`);
+  ADD KEY `products_category_id_foreign` (`category_id`),
+  ADD KEY `brand_id` (`brand_id`);
 
 --
 -- Indexes for table `product_images`
@@ -593,6 +629,12 @@ ALTER TABLE `branches`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -632,7 +674,7 @@ ALTER TABLE `loc_region`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -688,7 +730,8 @@ ALTER TABLE `loc_district`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `product_images`

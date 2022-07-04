@@ -16,20 +16,23 @@ use Yii;
  * @property int $price
  * @property int $box
  * @property int $category_id
- * @property int $brand
+ * @property int $brand_id
  * @property string|null $note
  * @property string $code
  * @property string|null $bio
  * @property int $is_sale
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @property string|null $brand_name
  *
  * @property Categories $category
+ * @property Brand $brand
  * @property IncomeProducts[] $incomeProducts
  * @property ProductImages $productImages
  */
 class Products extends \yii\db\ActiveRecord
 {
+    public $brand_name;
     /**
      * {@inheritdoc}
      */
@@ -44,10 +47,10 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['serial','name', 'price', 'box', 'category_id', 'brand'], 'required'],
-            [['serial_num','serial', 'price', 'box', 'category_id', 'brand', 'is_sale', ], 'integer'],
+            [['serial','name', 'price', 'box', 'category_id', 'brand_name'], 'required'],
+            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', ], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['image', 'serial', 'name', 'note', 'code', 'bio'], 'string', 'max' => 255],
+            [['image', 'serial', 'name', 'note', 'code', 'bio','brand_name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
@@ -66,7 +69,8 @@ class Products extends \yii\db\ActiveRecord
             'price' => 'Narxi',
             'box' => 'Karopkadagi soni',
             'category_id' => 'Kategoriyasi',
-            'brand' => 'Brend',
+            'brand_id' => 'Brend',
+            'brand_name' => 'Brend',
             'note' => 'Izoh',
             'code' => 'Kod',
             'bio' => 'Bio',
@@ -84,6 +88,10 @@ class Products extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+    }
+
+    public function getBrand(){
+        return $this->hasOne(Brand::className(),['id'=>'brand_id']);
     }
 
     public function slug(){
