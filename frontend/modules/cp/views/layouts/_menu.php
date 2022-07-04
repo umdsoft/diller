@@ -48,11 +48,24 @@
                 </li>
                 <li>
                     <a href="#" class="arrow-down">
+                        <i data-feather="pie-chart"></i>
+                        <span data-key="t-ecommerce">Mijozlar</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/clients'])?>"><i data-feather="user"></i> Mijozlar</a></li>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/client-subjects'])?>"><i data-feather="user"></i> Tadbirkorlik subyektlari</a></li>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/client-groups'])?>"><i data-feather="user"></i> Tadbirkorlik turlari</a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#" class="arrow-down">
                         <i data-feather="grid"></i>
                         <span data-key="t-ecommerce">Ma'lumotlar</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="#"><i data-feather="user"></i> Mijozlar</a></li>
+
                         <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/products'])?>"><i data-feather="box"></i> Maxsulotlar</a>
                         </li>
                         <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/categories'])?>"><i data-feather="box"></i> Maxsulotlar Turlari</a></li>

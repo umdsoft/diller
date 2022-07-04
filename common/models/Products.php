@@ -96,6 +96,11 @@ class Products extends \yii\db\ActiveRecord
 
     public function slug(){
         $this->code = Transliterator::transliterate($this->name);
+        $n=0;
+        while(static::findOne(['code'=>$this->code])){
+            $n++;
+            $this->code = Transliterator::transliterate($this->name).'-'.$n;
+        }
     }
     /**
      * Gets query for [[IncomeProducts]].

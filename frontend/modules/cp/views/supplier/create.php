@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Users */
 
-$this->title = 'Create Supplier';
-$this->params['breadcrumbs'][] = ['label' => 'Supplier', 'url' => ['index']];
+$this->title = 'Yetkazib beruvchi qo`shish';
+$this->params['breadcrumbs'][] = ['label' => 'Yetkazib beruvchilar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-create">

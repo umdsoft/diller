@@ -6,23 +6,22 @@ use Behat\Transliterator\Transliterator;
 use Yii;
 
 /**
- * This is the model class for table "brand".
+ * This is the model class for table "client_types".
  *
  * @property int $id
  * @property string $name
  * @property string $code
- * @property string $image
- * @property int $category_id
- * @property Categories $category
+ *
+ * @property ClientSubjects[] $clientSubjects
  */
-class Brand extends \yii\db\ActiveRecord
+class ClientTypes extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'brand';
+        return 'client_types';
     }
 
     /**
@@ -32,7 +31,7 @@ class Brand extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'code'], 'required'],
-            [['name', 'code','image'], 'string', 'max' => 255],
+            [['name', 'code'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,16 +43,9 @@ class Brand extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Nomi',
-            'code' => 'Kod',
-            'category_id' => 'Turi',
-            'image' => 'Rasm',
+            'code' => 'kod',
         ];
     }
-
-    public function getCategory(){
-        return $this->hasOne(Categories::className(),['id'=>'category_id']);
-    }
-
     public function slug(){
         $this->code = Transliterator::transliterate($this->name);
         $n=0;
@@ -61,5 +53,14 @@ class Brand extends \yii\db\ActiveRecord
             $n++;
             $this->code = Transliterator::transliterate($this->name).'-'.$n;
         }
+    }
+    /**
+     * Gets query for [[ClientSubjects]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClientSubjects()
+    {
+        return $this->hasMany(ClientSubjects::className(), ['type_id' => 'id']);
     }
 }

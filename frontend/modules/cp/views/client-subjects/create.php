@@ -3,14 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Users */
+/* @var $model common\models\ClientSubjects */
 
-$this->title = 'O`zgartirish: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Yetkazib beruvchilar', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'O`zgartirish';
+$this->title = 'Tadbirkorlik subyekti qo`shish';
+$this->params['breadcrumbs'][] = ['label' => 'Tadbirkorlik subyektlari', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-update">
+<div class="client-subjects-create">
 
     <div class="row">
         <div class="col-12">
@@ -19,6 +18,7 @@ $this->params['breadcrumbs'][] = 'O`zgartirish';
                     <?= $this->render('_form', [
                         'model' => $model,
                     ]) ?>
+
                 </div>
             </div>
         </div>
