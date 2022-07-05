@@ -35,6 +35,7 @@ use Yii;
  */
 class ClientSubjects extends \yii\db\ActiveRecord
 {
+    public $region;
     /**
      * {@inheritdoc}
      */
@@ -49,7 +50,8 @@ class ClientSubjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['district_id', 'type_id', 'group_id'], 'integer'],
+            [['name','alt_name','type_id','group_id','address','phone','director','inn','district_id','region'],'required','on'=>'insert'],
+            [['district_id', 'type_id', 'group_id','region'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'alt_name', 'address', 'lan', 'lng', 'phone', 'director', 'inn', 'oked', 'nds_number', 'referent_point'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 50],
@@ -69,6 +71,7 @@ class ClientSubjects extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'To`liq nomi',
             'alt_name' => 'Qisqa noimi',
+            'region' => 'Viloyat',
             'district_id' => 'Tuman',
             'address' => 'Manzil',
             'lan' => 'Lan',

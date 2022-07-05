@@ -68,7 +68,7 @@ class ClientSubjectsController extends Controller
     public function actionCreate()
     {
         $model = new ClientSubjects();
-
+        $model->scenario = 'insert';
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -92,7 +92,7 @@ class ClientSubjectsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->scenario = 'insert';
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
