@@ -3,7 +3,7 @@ return [
     'adminEmail' => 'admin@example.com',
     'status'=>[
         1=>'Aktiv',
-        0=>'Deaktiv'
+        0=>'Deaktiv',
     ],
     'is_sale'=>[
         1=> 'Sotuvda bor',

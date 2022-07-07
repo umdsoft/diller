@@ -103,7 +103,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                             </tr>
                                             </thead>
                                             <tbody>
-
+                                                <?php $n=0; foreach ($model->bank as $item): $n++;?>
+                                                    <tr>
+                                                        <td><?= $n?></td>
+                                                        <td><?= $item->bank->mfo.'-'.$item->bank->name?></td>
+                                                        <td><?= $item->account?></td>
+                                                        <td>
+                                                            <a href="<?= Yii::$app->urlManager->createUrl(['/cp/client-subjects/deleteacc', 'id' => $item->id,'sid'=>$model->id]) ?>" data-method="post" data-confirm="Siz rostdan ham ushbu hisobni o`chirmoqchimisiz?"><span class="fa fa-trash text-danger"></span></a></td>
+                                                    </tr>
+                                                <?php endforeach;?>
                                             </tbody>
                                         </table>
                                     </div>

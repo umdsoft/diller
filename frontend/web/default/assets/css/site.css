@@ -10,3 +10,7 @@
 .has-success input{
     border: #34c38f solid 1px;
 }
+
+span.select2-container{
+    display: block !important;
+}

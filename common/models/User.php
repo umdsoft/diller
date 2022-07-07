@@ -13,7 +13,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
- * @property string $password_hash
+ * @property string $password
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
@@ -21,13 +21,12 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
  */
 class User extends Users implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_INACTIVE = 9;
-    const STATUS_ACTIVE = 10;
+    const STATUS_DELETED = -1;
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
 
 
     /**
@@ -35,7 +34,7 @@ class User extends Users implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%users}}';
     }
 
     /**
@@ -166,7 +165,7 @@ class User extends Users implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     /**
@@ -176,7 +175,7 @@ class User extends Users implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**

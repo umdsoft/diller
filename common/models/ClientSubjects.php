@@ -131,6 +131,10 @@ class ClientSubjects extends \yii\db\ActiveRecord
         return $this->hasOne(ClientGroups::className(), ['id' => 'group_id']);
     }
 
+    public function getBank(){
+        return $this->hasMany(ClientAccounts::className(),['subject_id'=>'id']);
+    }
+
     /**
      * Gets query for [[Type]].
      *

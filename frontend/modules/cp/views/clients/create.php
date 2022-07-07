@@ -3,14 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Users */
+/* @var $model common\models\Clients */
 
-$this->title = 'O`zgartirish: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Foydalanuvchilar', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'O`zgartirish';
+$this->title = 'Mijoz qo`shish';
+$this->params['breadcrumbs'][] = ['label' => 'Mijozlar', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-update">
+<div class="clients-create">
 
     <div class="row">
         <div class="col-12">
@@ -23,5 +22,6 @@ $this->params['breadcrumbs'][] = 'O`zgartirish';
             </div>
         </div>
     </div>
+
 
 </div>

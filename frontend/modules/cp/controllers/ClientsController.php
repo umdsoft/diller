@@ -2,16 +2,16 @@
 
 namespace frontend\modules\cp\controllers;
 
-use common\models\Users;
-use common\models\search\UsersSearch;
+use common\models\Clients;
+use common\models\search\CientsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsersController implements the CRUD actions for Users model.
+ * ClientsController implements the CRUD actions for Clients model.
  */
-class UsersController extends Controller
+class ClientsController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class UsersController extends Controller
     }
 
     /**
-     * Lists all Users models.
+     * Lists all Clients models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UsersSearch();
+        $searchModel = new CientsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,8 +48,8 @@ class UsersController extends Controller
     }
 
     /**
-     * Displays a single Users model.
-     * @param string $id ID
+     * Displays a single Clients model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -61,18 +61,16 @@ class UsersController extends Controller
     }
 
     /**
-     * Creates a new Users model.
+     * Creates a new Clients model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Users();
+        $model = new Clients();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->encrypt();
-                $model->save();
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -85,35 +83,29 @@ class UsersController extends Controller
     }
 
     /**
-     * Updates an existing Users model.
+     * Updates an existing Clients model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id ID
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $old = $model->password;
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            if($model->password){
-                $model->encrypt();
-            }else{
-                $model->password = $old;
-            }
-            $model->save();
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        $model->password = "";
+
         return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing Users model.
+     * Deletes an existing Clients model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id ID
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -125,15 +117,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Finds the Users model based on its primary key value.
+     * Finds the Clients model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Users the loaded model
+     * @param int $id ID
+     * @return Clients the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Users::findOne(['id' => $id])) !== null) {
+        if (($model = Clients::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

@@ -10,7 +10,7 @@
                                     <img src="/default/assets/images/logo-sm.svg" alt="" height="30">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="/default/assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Dason</span>
+                                    <img src="/default/assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Bunyod</span>
                                 </span>
                 </a>
 
@@ -19,7 +19,7 @@
                                     <img src="/default/assets/images/logo-sm.svg" alt="" height="30">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="/default/assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Dason</span>
+                                    <img src="/default/assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Bunyod</span>
                                 </span>
                 </a>
             </div>
@@ -138,17 +138,13 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="/default/assets/images/users/avatar-1.jpg"
-                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1 fw-medium">Paul K.</span>
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium"><?= Yii::$app->user->identity->name ?></span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="apps-contacts-profile.html"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
-                    <a class="dropdown-item" href="auth-lock-screen.html"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock screen</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="auth-logout.html"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                    <a class="dropdown-item" href="#"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['/site/logout'])?>" data-method="post"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Chiqish</a>
                 </div>
             </div>
 

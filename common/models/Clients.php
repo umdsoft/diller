@@ -53,7 +53,7 @@ class Clients extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Login',
+            'username' => 'Telefon',
             'password' => 'Parol',
             'email' => 'Email',
             'name' => 'FIO',

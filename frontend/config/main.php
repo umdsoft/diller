@@ -15,6 +15,9 @@ return [
         'cp' => [
             'class' => 'frontend\modules\cp\Module',
         ],
+        'store' => [
+            'class' => 'frontend\modules\store\Module',
+        ],
     ],
     'language'=>'uz',
     'components' => [

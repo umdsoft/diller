@@ -25,7 +25,7 @@ $model = new \common\models\ClientAccounts();
 
 
 
-                    <?= $form->field($model, 'bank_id',)->dropDownList(\frontend\components\GetArray::Banks(),['prompt'=>'Bankni tanlang','class'=>'select2','style'=>'display:block']) ?>
+                    <?= $form->field($model, 'bank_id')->dropDownList(\frontend\components\GetArray::Banks(),['prompt'=>'Bankni tanlang','class'=>'select2','style'=>'display:block']) ?>
 
                     <?= $form->field($model,'account')->textInput()?>
 

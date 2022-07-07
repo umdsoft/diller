@@ -6,22 +6,20 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\UsersSearch */
+/* @var $searchModel common\models\search\CientsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Foydalanuvchilar ro`yhati';
+$this->title = 'Mijozlar ro`yhati';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-index">
-
+<div class="clients-index">
 
     <div class="row">
         <div class="col-12">
             <div class="card">
-
                 <div class="card-body p-4">
                     <p>
-                        <?= Html::a('Foydalanuvchi qo`shish', ['create'], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('Mijoz qo`shish', ['create'], ['class' => 'btn btn-success']) ?>
                     </p>
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -35,29 +33,22 @@ $this->params['breadcrumbs'][] = $this->title;
 //                            'id',
                             'name',
                             'username',
-                            'password',
-//                            'created',
-                            //'updated',
-//                            'role_id',
-                            [
-                                'attribute'=>'role_id',
-                                'value'=>function($d){
-                                    return $d->role->name;
-                                },
-                                'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Roles::find()->all(),'id','name')
-                            ],
+//                            'password',
+                            'email:email',
+
                             //'status',
+                            [
+                                'attribute'=>'status',
+                                'value'=>function($d){
+                                    return Yii::$app->params['status'][$d->status];
+                                },
+                                'filter'=>Yii::$app->params['status']
+                            ],
                             //'auth_key',
                             //'verification_token',
                             //'password_reset_token',
-//                            'branch_id',
-                            [
-                                'attribute'=>'branch_id',
-                                'value'=>function($d){
-                                    return $d->branch->branch_name;
-                                },
-                                'filter'=>\yii\helpers\ArrayHelper::map(\common\models\Branches::find()->all(),'id','branch_name')
-                            ],
+                            'created_at',
+                            //'updated_at',
                             [
                                 'class' => ActionColumn::className(),
                                 'urlCreator' => function ($action, $model, $key, $index, $column) {
@@ -68,12 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]); ?>
                 </div>
             </div>
-        </div> <!-- end col -->
+        </div>
     </div>
-    <!-- end row -->
-
-
-
 
 
 

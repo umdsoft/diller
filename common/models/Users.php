@@ -84,6 +84,10 @@ class Users extends \yii\db\ActiveRecord
         return $this->hasOne(Branches::className(), ['id' => 'branch_id']);
     }
 
+    public function encrypt(){
+        $this->password = Yii::$app->security->generatePasswordHash($this->password);
+    }
+
     /**
      * Gets query for [[Incomes]].
      *

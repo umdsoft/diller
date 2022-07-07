@@ -2,12 +2,13 @@
 
 namespace frontend\modules\cp\controllers;
 
+use common\models\ClientAccounts;
 use common\models\ClientSubjects;
 use common\models\search\ClientSubjectsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use Yii;
 /**
  * ClientSubjectsController implements the CRUD actions for ClientSubjects model.
  */
@@ -25,6 +26,7 @@ class ClientSubjectsController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                        'deleteacc' => ['POST'],
                     ],
                 ],
             ]
@@ -55,6 +57,14 @@ class ClientSubjectsController extends Controller
      */
     public function actionView($id)
     {
+
+        $model = new ClientAccounts();
+        $model->subject_id = $id;
+        if($model->load(Yii::$app->request->post()) and $model->save()){
+            $model->refresh();
+            Yii::$app->session->setFlash('success','Bank hisob raqami muvoffaqiyatli qo`shildi');
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -114,6 +124,16 @@ class ClientSubjectsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeleteacc($id,$sid){
+        if($model = ClientAccounts::findOne($id)){
+            $model->delete();
+            Yii::$app->session->setFlash('success','Bank hisobi muvoffaqiyatli o`chirildi');
+        }else{
+            Yii::$app->session->setFlash('error','Bunday bank hisobi topilmadi');
+        }
+        return $this->redirect(['view','id'=>$sid]);
     }
 
     /**
