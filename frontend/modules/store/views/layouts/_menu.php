@@ -9,7 +9,7 @@
                 <li class="menu-title" data-key="t-menu">Menu</li>
 
                 <li>
-                    <a href="<?= Yii::$app->urlManager->createUrl(['site/index'])?>">
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/store/index'])?>">
                         <i data-feather="home"></i>
                         <span data-key="t-dashboard">Bosh sahifa</span>
                     </a>
@@ -43,7 +43,7 @@
                 <li>
                     <a href="#" class="arrow-down">
                         <i data-feather="pie-chart"></i>
-                        <span data-key="t-ecommerce">Xisobot</span>
+                        <span data-key="t-ecommerce">Hisobot</span>
                     </a>
                     <ul class="sub-menu">
                         <li><a href="#">Kunlik</a></li>
