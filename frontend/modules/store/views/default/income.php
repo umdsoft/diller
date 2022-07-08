@@ -38,8 +38,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
 
-                        <div class="row">
-                            <?= $form->field()?>
+                        <div class="d-flex">
+
+                            <?= $form->field($model, 'note')->textInput() ?>
+                            <?= $form->field($model, 'note')->textInput() ?>
+                            <?= $form->field($model, 'note')->textInput() ?>
+                            <?= $form->field($model, 'note')->textInput() ?>
+                            <?= $form->field($model, 'note')->textInput() ?>
+                            <?= $form->field($model, 'note')->textInput() ?>
+                            <?= $form->field($model, 'note')->textInput() ?>
+
                         </div>
 
                         <div class="form-group">

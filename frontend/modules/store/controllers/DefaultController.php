@@ -24,9 +24,10 @@ class DefaultController extends Controller
         $model = new Income();
         $model->status_id = 1;
 
-        $products = new IncomeProducts();
+        $products[] = new IncomeProducts();
         return $this->render('income',[
-            'model'=>$model
+            'model'=>$model,
+            'products'=>$products
         ]);
     }
 
