@@ -2,6 +2,8 @@
 
 namespace frontend\modules\store\controllers;
 
+use common\models\Income;
+use common\models\IncomeProducts;
 use yii\web\Controller;
 
 /**
@@ -18,8 +20,14 @@ class DefaultController extends Controller
         return $this->render('index');
     }
 
-    public function actionArrival(){
+    public function actionIncome(){
+        $model = new Income();
+        $model->status_id = 1;
 
+        $products = new IncomeProducts();
+        return $this->render('income',[
+            'model'=>$model
+        ]);
     }
 
 

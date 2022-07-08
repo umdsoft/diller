@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/store/default/income'])?>">
                         <i data-feather="check-circle"></i>
                         <span data-key="t-chat">Kirim</span>
                     </a>

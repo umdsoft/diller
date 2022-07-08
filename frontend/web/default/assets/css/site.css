@@ -11,6 +11,7 @@
     border: #34c38f solid 1px;
 }
 
-span.select2-container{
+.select2-container{
     display: block !important;
+    width: 100% !important;
 }

@@ -10,8 +10,10 @@ use common\models\ClientGroups;
 use common\models\ClientTypes;
 use common\models\LocDistrict;
 use common\models\LocRegion;
+use common\models\Suppliers;
+use common\models\Warehouse;
 use yii\helpers\ArrayHelper;
-
+use Yii;
 
 class GetArray
 {
@@ -41,4 +43,22 @@ class GetArray
         }
         return $data;
     }
+
+    public static function Suppilers(){
+        $data = [];
+        foreach (Suppliers::find()->all() as $item){
+            $data[$item->id] = $item->inn.'-'.$item->name;
+        }
+        return $data;
+    }
+
+    public static function Warehouses(){
+        if(Yii::$app->user->identity->role_id == 5){
+            return ArrayHelper::map(Warehouse::find()->all(),'id','name');
+        }else{
+            return ArrayHelper::map(Warehouse::find()->where(['branch_id'=>Yii::$app->user->identity->branch_id])->all(),'id','name');
+
+        }
+    }
+
 }
