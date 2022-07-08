@@ -20,11 +20,20 @@ class Module extends \yii\base\Module
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-
                     [
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback'=>function($rule, $action){
+                            if(Yii::$app->user->identity->role_id != 5){
+                                $url = Yii::$app->user->identity->role->url;
+                                header('Location:'.$url);
+                                exit;
+                            }else{
+                                return true;
+                            }
+                        }
                     ],
+
                 ],
             ],
         ];
