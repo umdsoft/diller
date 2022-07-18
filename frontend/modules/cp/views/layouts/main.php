@@ -14,7 +14,7 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>" data-theme-mode="default"  class="h-100">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,7 +22,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body data-topbar="light" class="pace-done sidebar-enable" data-layout-mode="light" data-layout="horizantal" data-sidebar="dark">
+<body data-topbar="dark" class="pace-done sidebar-enable" data-layout-mode="light" data-layout="horizantal" data-sidebar="brand">
 
 <?php $this->beginBody() ?>
 

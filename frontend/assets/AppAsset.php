@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
         'assets/css/bootstrap.min.css',
         'assets/css/icons.min.css',
         'assets/libs/select2/css/select2.min.css',
+//        'assets/css/default.css',
         'assets/css/app.min.css',
         'assets/css/site.css',
     ];
