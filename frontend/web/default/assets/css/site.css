@@ -15,3 +15,6 @@
     display: block !important;
     width: 100% !important;
 }
+body[data-sidebar=brand] #sidebar-menu ul li a {
+    color:#fff;
+}

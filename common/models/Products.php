@@ -21,6 +21,7 @@ use Yii;
  * @property string $code
  * @property string|null $bio
  * @property int $is_sale
+ * @property int $supplier_id
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property string|null $brand_name
@@ -47,11 +48,12 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['serial','name', 'price', 'box', 'category_id', 'brand_name'], 'required'],
-            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', ], 'integer'],
+            [['serial','name', 'price', 'box', 'category_id', 'brand_name','supplier_id',], 'required'],
+            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id',], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['image', 'serial', 'name', 'note', 'code', 'bio','brand_name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::className(), 'targetAttribute' => ['supplier_id' => 'id']],
         ];
     }
 
@@ -77,6 +79,7 @@ class Products extends \yii\db\ActiveRecord
             'is_sale' => 'Sotuvda mavjudligi',
             'created_at' => 'Yaratildi',
             'updated_at' => 'O`zgartirildi',
+            'supplier_id' => 'Yetkazib beruvchi',
         ];
     }
 
@@ -120,5 +123,24 @@ class Products extends \yii\db\ActiveRecord
     public function getProductImages()
     {
         return $this->hasOne(ProductImages::className(), ['product_id' => 'id']);
+    }
+    /**
+     * Gets query for [[IncomeOrderProducts]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncomeOrderProducts()
+    {
+        return $this->hasMany(IncomeOrderProducts::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Supplier]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupplier()
+    {
+        return $this->hasOne(Suppliers::className(), ['id' => 'supplier_id']);
     }
 }

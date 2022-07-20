@@ -11,7 +11,6 @@
                 <li>
                     <a href="<?= Yii::$app->urlManager->createUrl(['site/index'])?>">
                         <i data-feather="home"></i>
-                        <span class="badge rounded-pill bg-soft-success text-success float-end">9+</span>
                         <span data-key="t-dashboard">Bosh sahifa</span>
                     </a>
                 </li>

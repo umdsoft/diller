@@ -26,6 +26,8 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'box')->textInput() ?>
 
+            <?= $form->field($model,'supplier_id')->dropDownList(\frontend\components\GetArray::Suppilers(),['prompt'=>'Yetkazib beruvchini tanlang','class'=>'select2'])?>
+
             <?= $form->field($model, 'brand_name')->textInput() ?>
 
         </div>
