@@ -20,6 +20,7 @@ use Yii;
  */
 class IncomeOrderProducts extends \yii\db\ActiveRecord
 {
+    public $removed = 0;
     /**
      * {@inheritdoc}
      */
@@ -35,7 +36,7 @@ class IncomeOrderProducts extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'count', 'total', 'order_id'], 'required'],
-            [['product_id', 'box', 'status', 'order_id'], 'integer'],
+            [['product_id', 'box', 'status', 'order_id','removed'], 'integer'],
             [['count', 'total'], 'string', 'max' => 255],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => IncomeOrders::className(), 'targetAttribute' => ['order_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
@@ -49,12 +50,12 @@ class IncomeOrderProducts extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'count' => 'Count',
-            'box' => 'Box',
-            'total' => 'Total',
+            'product_id' => 'Mahsulot',
+            'count' => 'Soni',
+            'box' => 'Qutilar soni',
+            'total' => 'Umumiy soni',
             'status' => 'Status',
-            'order_id' => 'Order ID',
+            'order_id' => 'Buyurtma',
         ];
     }
 

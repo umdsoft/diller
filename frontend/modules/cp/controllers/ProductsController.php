@@ -92,7 +92,7 @@ class ProductsController extends Controller
         $model = new Products();
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->slug();
+
                 if($model->image = UploadedFile::getInstance($model,'image')){
                     $name = microtime(true).'.'.$model->image->extension;
                     $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
@@ -152,7 +152,7 @@ class ProductsController extends Controller
                 $brand->save();
                 $model->brand_id = $brand->id;
             }
-            $model->slug();
+
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }

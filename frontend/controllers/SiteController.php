@@ -49,6 +49,13 @@ class SiteController extends Controller
             ],
         ];
     }
+    public function beforeAction($action)
+    {
+        if(Yii::$app->user->identity->role_id!=6){
+            header('Location:'.Yii::$app->urlManager->createUrl([Yii::$app->user->identity->role->url]));
+            exit;
+        }
+    }
 
     /**
      * {@inheritdoc}

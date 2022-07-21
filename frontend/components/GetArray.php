@@ -5,11 +5,13 @@ namespace frontend\components;
 
 
 use common\models\Bank;
+use common\models\Branches;
 use common\models\Categories;
 use common\models\ClientGroups;
 use common\models\ClientTypes;
 use common\models\LocDistrict;
 use common\models\LocRegion;
+use common\models\Products;
 use common\models\ProductUnits;
 use common\models\Suppliers;
 use common\models\Warehouse;
@@ -60,6 +62,19 @@ class GetArray
             return ArrayHelper::map(Warehouse::find()->where(['branch_id'=>Yii::$app->user->identity->branch_id])->all(),'id','name');
 
         }
+    }
+
+    public static function Product()
+    {
+        $res = [];
+        $pro = Products::find()->all();
+        foreach ($pro as $item){
+            $res[$item->id] = $item->name.'-'.$item->code;
+        }
+        return $res;
+    }
+    public static function Branches(){
+        return ArrayHelper::map(Branches::find()->all(),'id','branch_name');
     }
 
     public static function Units(){

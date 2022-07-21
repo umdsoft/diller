@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-md-6">
 
+            <?= $form->field($model,'code')->textInput()?>
+
                 <?= $form->field($model, 'serial',['template'=>
                 "{label}\n<div class=\"input-group\">{input}\n<span class=\"input-group-btn\"><button class=\"btn btn-outline-primary getserialnum\" type=\"button\"><span class=\"fa fa-random\" aria-hidden=\"true\"></span></button></span></div>\n{hint}\n{error}"
             ])->textInput(['maxlength' => true, "aria-describedby"=>"basic-addon2"]) ?>

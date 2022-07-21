@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/income-orders'])?>">
                         <i data-feather="shopping-cart"></i>
                         <span data-key="t-chat">Buyurtma</span>
                     </a>

@@ -19,6 +19,7 @@ class DefaultController extends Controller
         return $this->render('index');
     }
 
+
     public function actionGetdistrict($id){
         $model = GetArray::District($id);
         $res = "<option>-Tumanni tanlang-</option>";

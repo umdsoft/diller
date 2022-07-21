@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw'
             ],
             'name',
-            'count',
+//            'count',
             'price',
             'box',
 //            'box_price',

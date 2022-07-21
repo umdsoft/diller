@@ -18,23 +18,25 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'inn')->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'director')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+
+        </div>
+        <div class="col-md-6">
+
+
+            <?= $form->field($model, 'buxgalter')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'phone_bux')->textInput(['maxlength' => true]) ?>
+
             <?= $form->field($model, 'oked')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'okonx')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'nds_num')->textInput(['maxlength' => true]) ?>
-
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'director')->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'buxgalter')->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'phone_bux')->textInput(['maxlength' => true]) ?>
 
         </div>
     </div>

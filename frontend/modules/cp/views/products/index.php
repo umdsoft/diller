@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //                            'id',
 //                            'image',
+                            'code',
                             'serial',
 //                            'serial_num',
                             'name',
