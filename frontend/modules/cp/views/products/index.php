@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'note',
                             //'code',
                             //'bio',
-//                            'is_sale',
+//                          'is_sale',
                             [
                                 'attribute'=>'is_sale',
                                 'value'=>function($d){

@@ -26,10 +26,12 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'box')->textInput() ?>
 
+            <?= $form->field($model,'unit_id')->dropDownList(\frontend\components\GetArray::Units(),['prompt'=>'Mahsulot birligini tanlang'])?>
+
             <?= $form->field($model,'supplier_id')->dropDownList(\frontend\components\GetArray::Suppilers(),['prompt'=>'Yetkazib beruvchini tanlang','class'=>'select2'])?>
 
             <?= $form->field($model, 'brand_name')->textInput() ?>
-
+            <ul class="list-group" id="livesearch"></ul>
         </div>
         <div class="col-md-6">
 
@@ -66,6 +68,7 @@ use yii\widgets\ActiveForm;
 
 <?php
 $url = Yii::$app->urlManager->createUrl(['/cp/products/getserial']);
+$get_brand_url = Yii::$app->urlManager->createUrl(['/cp/products/getbrand']);
 $this->registerJs("
     $('.getserialnum').click(function(){
         $.get('{$url}').done(function(data){
@@ -87,5 +90,27 @@ $this->registerJs("
         $('#products-image').change(function() {
           readURL(this);
         });
+        
+        
+    $(document).ready(function(){
+            
+            $('#products-brand_name').keyup(function(){
+                $('#livesearch').html('');
+                
+                var searchField = $('#products-brand_name').val();
+                
+                $.get('{$get_brand_url}?name='+searchField).done(function(data){
+                    $('#livesearch').append(data);
+                })
+                                
+            });
+
+            $('#livesearch').on('click', 'li', function() {
+                var click_text = $(this).text();
+                $('#products-brand_name').val($.trim(click_text));
+                $(\"#livesearch\").html('');
+                
+            });
+        });    
 ")
 ?>

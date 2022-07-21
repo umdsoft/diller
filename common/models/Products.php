@@ -22,6 +22,7 @@ use Yii;
  * @property string|null $bio
  * @property int $is_sale
  * @property int $supplier_id
+ * @property int $unit_id
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property string|null $brand_name
@@ -48,12 +49,13 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['serial','name', 'price', 'box', 'category_id', 'brand_name','supplier_id',], 'required'],
-            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id',], 'integer'],
+            [['serial','name', 'price', 'box', 'category_id', 'brand_name','supplier_id','unit_id'], 'required'],
+            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id','unit_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['image', 'serial', 'name', 'note', 'code', 'bio','brand_name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::className(), 'targetAttribute' => ['supplier_id' => 'id']],
+            [['unit_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductUnits::className(), 'targetAttribute' => ['unit_id' => 'id']],
         ];
     }
 
@@ -76,6 +78,7 @@ class Products extends \yii\db\ActiveRecord
             'note' => 'Izoh',
             'code' => 'Kod',
             'bio' => 'Bio',
+            'unit_id' => 'Birlik',
             'is_sale' => 'Sotuvda mavjudligi',
             'created_at' => 'Yaratildi',
             'updated_at' => 'O`zgartirildi',

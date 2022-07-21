@@ -10,6 +10,7 @@ use common\models\ClientGroups;
 use common\models\ClientTypes;
 use common\models\LocDistrict;
 use common\models\LocRegion;
+use common\models\ProductUnits;
 use common\models\Suppliers;
 use common\models\Warehouse;
 use yii\helpers\ArrayHelper;
@@ -59,6 +60,10 @@ class GetArray
             return ArrayHelper::map(Warehouse::find()->where(['branch_id'=>Yii::$app->user->identity->branch_id])->all(),'id','name');
 
         }
+    }
+
+    public static function Units(){
+        return ArrayHelper::map(ProductUnits::find()->all(),'id','name');
     }
 
 }

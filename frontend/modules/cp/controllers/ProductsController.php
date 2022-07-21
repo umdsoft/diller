@@ -60,6 +60,14 @@ class ProductsController extends Controller
         return $serial;
     }
 
+    public function actionGetbrand($name){
+        $model = Brand::find()->filterWhere(['like','name',$name])->all();
+        $res = "";
+        foreach ($model as $item) {
+            $res .= "<li class=\"list-group-item live-link-class\">{$item->name}</li>";
+        }
+        return $res;
+    }
     /**
      * Displays a single Products model.
      * @param string $id ID
@@ -97,7 +105,7 @@ class ProductsController extends Controller
                 }else{
                     $brand = new Brand();
                     $brand->name = $model->brand_name;
-                    $brand->category_id = $model->category_id;
+
                     $brand->slug();
                     $brand->save();
                     $model->brand_id = $brand->id;
@@ -139,7 +147,7 @@ class ProductsController extends Controller
             }else{
                 $brand = new Brand();
                 $brand->name = $model->brand_name;
-                $brand->category_id = $model->category_id;
+
                 $brand->slug();
                 $brand->save();
                 $model->brand_id = $brand->id;
