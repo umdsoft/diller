@@ -102,11 +102,8 @@ class IncomeOrdersController extends Controller
                         }
                     }
                 }
-            }else{
-                echo "<pre>";
-                var_dump($this->request->post());
-                exit;
-            }
+                return $this->redirect(['view','id'=>$model->id]);
+        }
         } else {
             $model->loadDefaultValues();
         }
