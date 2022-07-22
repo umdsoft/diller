@@ -95,7 +95,7 @@ class IncomeOrdersController extends Controller
                             $products[$i]->order_id = $model->id;
                             $products[$i]->status = 0;
                             $products[$i]->product_id = $single['product_id'];
-                            $products[$i]->box = $single['box']?$single['box']:0;
+                            $products[$i]->box = $single['box']? $single['box']:0;
                             $products[$i]->count = $single['count'];
                             $products[$i]->total = intval($single['box']) * intval($products[$i]->product->box) + intval($single['count']);
                             $products[$i]->save(false);
@@ -103,7 +103,7 @@ class IncomeOrdersController extends Controller
                     }
                 }
                 return $this->redirect(['view','id'=>$model->id]);
-        }
+            }
         } else {
             $model->loadDefaultValues();
         }
