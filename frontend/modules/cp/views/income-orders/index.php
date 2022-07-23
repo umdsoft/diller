@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute'=>'number_full',
                                 'value'=>function($d){
                                     $url = Yii::$app->urlManager->createUrl(['/cp/income-orders/view','id'=>$d->id]);
+                                    return "<a href='{$url}'>{$d->number_full}</a>";
                                 },
                                 'format'=>'raw'
                             ],
@@ -49,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute'=>'branch_id',
                                 'value'=>function($d){
-                                    return $d->branch->name;
+                                    return $d->branch->branch_name;
                                 },
                                 'filter'=>\frontend\components\GetArray::Branches()
                             ],

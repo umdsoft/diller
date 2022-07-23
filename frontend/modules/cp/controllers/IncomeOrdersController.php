@@ -34,13 +34,6 @@ class IncomeOrdersController extends Controller
         );
     }
 
-    public function actionGenorderpro($key){
-        $model = new IncomeOrderProducts();
-        $html = $this->renderAjax('_genorderpro',['key'=>$key,'products'=>$model]);
-        $res = mb_substr($html,0,strpos($html,'<form '));
-        return $res;
-    }
-
     /**
      * Lists all IncomeOrders models.
      *
@@ -78,40 +71,14 @@ class IncomeOrdersController extends Controller
     public function actionCreate()
     {
         $model = new IncomeOrders();
-        $products = [];
-        $products[] = new IncomeOrderProducts();
         $model->branch_id = Yii::$app->user->identity->branch_id;
-        if ($this->request->isPost) {
-            $n = IncomeOrders::find()->filterWhere(['like','created','date'])->max('number');
-            $model->number = $n?$n+1:1;
-            $model->number_full = date('Y').'-'.$model->number;
-            $model->status = 0;
-            if($model->save()){
-                $postData = $this->request->post('IncomeOrderProducts');
-                if ($postData) {
-                    foreach ($postData as $i => $single) {
-                        if($single['removed'] == 0){
-                            $products[$i] = new IncomeOrderProducts();
-                            $products[$i]->order_id = $model->id;
-                            $products[$i]->status = 0;
-                            $products[$i]->product_id = $single['product_id'];
-                            $products[$i]->box = $single['box']? $single['box']:0;
-                            $products[$i]->count = $single['count'];
-                            $products[$i]->total = intval($single['box']) * intval($products[$i]->product->box) + intval($single['count']);
-                            $products[$i]->save(false);
-                        }
-                    }
-                }
-                return $this->redirect(['view','id'=>$model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-            'products'=>new IncomeOrderProducts()
-        ]);
+        $n = IncomeOrders::find()->filterWhere(['like','created',date('Y-m-d')])->max('number');
+        $n++;
+        $model->number = $n;
+        $model->number_full = date('Y').'-'.$model->number;
+        $model->status = 0;
+        $model->save();
+        return $this->redirect(['update','id'=>$model->id]);
     }
 
     /**
@@ -121,12 +88,11 @@ class IncomeOrdersController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$type = null)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($type == 'submit'){
+            Yii::$app->session->setFlash('success','Buyurtma ma`lumotlari saqlandi');
         }
 
         return $this->render('update', [
