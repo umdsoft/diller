@@ -22,3 +22,13 @@ $this->params['breadcrumbs'][] = 'Buyurtma raqami';
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <a href="<?= Yii::$app->urlManager->createUrl(['/cp/income-orders/update','id'=>$model->id,'type'=>'submit'])?>" class="btn btn-success">
+                Saqlash
+            </a>
+        </div>
+    </div>
+</div>

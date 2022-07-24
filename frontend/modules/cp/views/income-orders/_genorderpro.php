@@ -1,17 +1,22 @@
 <?php
 use yii\widgets\ActiveForm;
-/* @var $products \common\models\IncomeOrderProducts*/
+/* @var $model \common\models\IncomeOrderProducts*/
 /* @var $key integer*/
 
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin([
+    'options' => [
+        'enableAjaxValidation' => true,
+        'enableClientValidation' => true,
+    ]
+]); ?>
 
-<?= $form->field($products,'product_id')->dropDownList(\frontend\components\GetArray::Product(),['prompt'=>'Mahsulotni tanlang','class'=>'select2-'.$key.' form-control'])?>
-<?= $form->field($products,'box')->textInput(['type'=>'number','min'=>'1'])?>
-<?= $form->field($products,'count')->textInput(['type'=>'number','min'=>'1','value'=>1])?>
-<?= $form->field($products,'total')->textInput(['type'=>'number','min'=>'1','value'=>1])?>
+<?= $model->isNewRecord ? $form->field($model,'product_id')->dropDownList(\frontend\components\GetArray::IncomeProduct($id),['prompt'=>'Mahsulotni tanlang','class'=>'select2 form-control'])
+: $form->field($model,'product_id')->dropDownList(\frontend\components\GetArray::Product(),['prompt'=>'Mahsulotni tanlang','class'=>'select2 form-control','disabled'=>true])
+?>
+<?= $form->field($model,'box')->textInput()?>
+<?= $form->field($model,'count')->textInput()?>
 <button type="submit" class="btn btn-success">Saqlash</button>
 <?php $form = ActiveForm::end();?>
-
 

@@ -81,6 +81,27 @@ class IncomeOrdersController extends Controller
         return $this->redirect(['update','id'=>$model->id]);
     }
 
+
+    public function actionProduct($id,$pid=null){
+        if($pid){
+            $model = IncomeOrderProducts::findOne($pid);
+        }else{
+            $model = new IncomeOrderProducts();
+        }
+        $model->order_id = $id;
+        if($model->load($this->request->post())){
+            $total = floatval(floatval($model->box) * floatval($model->product->box) + floatval($model->count));
+            $model->total = "{$total}";
+            if($model->save()){
+                return $this->redirect(['update','id'=>$id]);
+            }else{
+                echo "<pre>";
+                var_dump($model);
+                exit;
+            }
+        }
+        return $this->renderAjax('_genorderpro',['model'=>$model,'id'=>$id]);
+    }
     /**
      * Updates an existing IncomeOrders model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -93,6 +114,7 @@ class IncomeOrdersController extends Controller
         $model = $this->findModel($id);
         if($type == 'submit'){
             Yii::$app->session->setFlash('success','Buyurtma ma`lumotlari saqlandi');
+            return $this->redirect(['view','id'=>$id]);
         }
 
         return $this->render('update', [

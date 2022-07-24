@@ -10,7 +10,7 @@ return [
         0=> 'Sotuvda mavjud emas'
     ],
     'order_status'=>[
-        0=>'Buyurtma tayyor',
+        0=>'Buyurtma tayyorlanish jarayonida',
         1=>'Yetkazib berilishi kutilmoqda',
         2=>'Buyurtma qabul qilingan',
     ]

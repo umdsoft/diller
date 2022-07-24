@@ -73,6 +73,15 @@ class GetArray
         }
         return $res;
     }
+    public static function IncomeProduct($id)
+    {
+        $res = [];
+        $pro = Products::find()->where('id not in (select product_id from income_order_products where order_id = '.$id.')')->all();
+        foreach ($pro as $item){
+            $res[$item->id] = $item->name.'-'.$item->code;
+        }
+        return $res;
+    }
     public static function Branches(){
         return ArrayHelper::map(Branches::find()->all(),'id','branch_name');
     }
