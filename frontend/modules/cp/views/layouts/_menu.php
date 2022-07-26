@@ -75,6 +75,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="<?= Yii::$app->urlManager->createUrl(['/cp/warehouse/index'])?>">
+                                <i class="fa fa-warehouse"></i>
+                                <span data-key="t-chat">Omborxonalar</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?= Yii::$app->urlManager->createUrl(['/cp/branches/index'])?>">
                                 <i data-feather="users"></i>
                                 <span data-key="t-chat">Filaillar</span>

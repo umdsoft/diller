@@ -50,7 +50,7 @@ class IncomeOrders extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'created' => 'Yaratildi',
-            'updated' => 'O`zgartirildi',
+            'updated' => 'So`ngi o`zgarish',
             'number_full' => 'Raqami',
             'number' => 'Raqami',
             'status' => 'Status',

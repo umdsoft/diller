@@ -137,6 +137,9 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(IncomeOrderProducts::className(), ['product_id' => 'id']);
     }
 
+    public function getUnit(){
+        return $this->hasOne(ProductUnits::className(),['id'=>'unit_id']);
+    }
     /**
      * Gets query for [[Supplier]].
      *

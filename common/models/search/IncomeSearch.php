@@ -4,12 +4,12 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\IncomeOrders;
+use common\models\Income;
 
 /**
- * IncomeOrdersSearch represents the model behind the search form of `common\models\IncomeOrders`.
+ * IncomeSearch represents the model behind the search form of `common\models\Income`.
  */
-class IncomeOrdersSearch extends IncomeOrders
+class IncomeSearch extends Income
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class IncomeOrdersSearch extends IncomeOrders
     public function rules()
     {
         return [
-            [['id', 'number', 'status', 'branch_id'], 'integer'],
-            [['created', 'updated', 'number_full'], 'safe'],
+            [['id', 'warehouse_id',  'user_id'], 'integer'],
+            [['note', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class IncomeOrdersSearch extends IncomeOrders
      */
     public function search($params)
     {
-        $query = IncomeOrders::find()->orderBy(['created'=>SORT_DESC]);
+        $query = Income::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,13 @@ class IncomeOrdersSearch extends IncomeOrders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-//            'created' => $this->created,
-            'updated' => $this->updated,
-            'number' => $this->number,
-            'status' => $this->status,
-            'branch_id' => $this->branch_id,
+            'warehouse_id' => $this->warehouse_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'user_id' => $this->user_id,
         ]);
 
-        $query->andFilterWhere(['like', 'number_full', $this->number_full])
-            ->andFilterWhere(['like', 'created', $this->created]);
+        $query->andFilterWhere(['like', 'note', $this->note]);
 
         return $dataProvider;
     }

@@ -59,7 +59,7 @@ class IncomeProducts extends \yii\db\ActiveRecord
             'count' => 'Soni',
             'box' => 'Karopkalar soni',
             'price' => 'Narxi',
-            'amout' => 'Umumiy narx',
+            'amout' => 'Sotilish narxi',
         ];
     }
 

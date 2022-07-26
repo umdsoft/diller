@@ -31,15 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'inn',
-            'oked',
-            'okonx',
-            'address',
-            'phone',
-            'director',
-            'buxgalter',
-            'phone_bux',
-            'nds_num'
+            [
+                'attribute'=>'branch_id',
+                'value'=>function($d){
+                    return $d->branch->branch_name;
+                }
+            ],
         ],
     ]) ?>
 

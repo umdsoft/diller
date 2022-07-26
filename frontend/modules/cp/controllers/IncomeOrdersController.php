@@ -6,6 +6,7 @@ use common\models\IncomeOrderProducts;
 use common\models\IncomeOrders;
 use common\models\Products;
 use common\models\search\IncomeOrdersSearch;
+use common\models\Suppliers;
 use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -58,8 +59,21 @@ class IncomeOrdersController extends Controller
      */
     public function actionView($id)
     {
+        $suppliers = Suppliers::find()->select(['suppliers.*'])
+            ->innerJoin('products p','suppliers.id = p.supplier_id')
+            ->where('p.id in (select product_id from income_order_products where order_id='.$id.')')
+            ->groupBy('suppliers.id')->orderBy(['count(p.id)'=>SORT_DESC])->all();
+        ;
+        $model = $this->findModel($id);
+        if($model->load($this->request->post()) and $model->save()){
+            Yii::$app->session->setFlash('success','Status muvoffaqiyatli o`zgartirildi');
+
+            return $this->refresh();
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'suppliers'=>$suppliers
         ]);
     }
 
@@ -122,6 +136,17 @@ class IncomeOrdersController extends Controller
         ]);
     }
 
+    public function actionRemove($id){
+        if($model = IncomeOrderProducts::findOne($id)){
+            $order_id = $model->order_id;
+            if($model->delete()){
+                Yii::$app->session->setFlash('success','Buyurtmadagi mahsulot o`chirildi');
+            }
+            return $this->redirect(['update','id'=>$order_id]);
+        }
+        return $this->redirect(['index']);
+    }
+
     /**
      * Deletes an existing IncomeOrders model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -131,8 +156,12 @@ class IncomeOrdersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        foreach ($model->incomeOrderProducts as $item){
+            $item->delete();
+        }
+        $model->delete();
+        Yii::$app->session->setFlash('success','Buyurtma o`chirildi');
         return $this->redirect(['index']);
     }
 
