@@ -54,6 +54,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'website')->checkbox(['value'=>1,'checked'=>true]) ?>
 
         </div>
     </div>

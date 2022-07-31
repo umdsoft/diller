@@ -14,12 +14,16 @@ use common\models\LocRegion;
 use common\models\Products;
 use common\models\ProductUnits;
 use common\models\Suppliers;
+use common\models\Users;
 use common\models\Warehouse;
 use yii\helpers\ArrayHelper;
 use Yii;
 
 class GetArray
 {
+    public static function User(){
+        return ArrayHelper::map(Users::find()->all(),'id','name');
+    }
     public static function Category(){
         return ArrayHelper::map(Categories::find()->all(),'id','name');
     }

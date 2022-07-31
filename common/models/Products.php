@@ -50,7 +50,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['serial','name', 'price', 'box', 'category_id', 'brand_name','supplier_id','unit_id'], 'required'],
-            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id','unit_id'], 'integer'],
+            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id','unit_id','website'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['image', 'serial', 'name', 'note', 'code', 'bio','brand_name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -80,6 +80,7 @@ class Products extends \yii\db\ActiveRecord
             'bio' => 'Bio',
             'unit_id' => 'Birlik',
             'is_sale' => 'Sotuvda mavjudligi',
+            'website' => 'Saytda ko`rsatish',
             'created_at' => 'Yaratildi',
             'updated_at' => 'O`zgartirildi',
             'supplier_id' => 'Yetkazib beruvchi',

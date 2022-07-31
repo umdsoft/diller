@@ -32,13 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
 //            'supplier_id',
-                            [
-                                'attribute'=>'supplier_id',
-                                'value'=>function($d){
-                                    return $d->supplier->name;
-                                },
-                                'filter'=>\frontend\components\GetArray::Suppilers()
-                            ],
+
                             'note:ntext',
 //            'warehouse_id',
                             [
@@ -51,7 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'status_id',
                             'created_at',
                             //'updated_at',
-                            //'user_id',
+//                            'user_id',
+                            [
+                                'attribute'=>'user_id',
+                                'value'=>function($d){
+                                    return $d->user->name;
+                                },
+                                'filter'=>\frontend\components\GetArray::User()
+                            ],
                             [
                                 'class' => ActionColumn::className(),
                                 'urlCreator' => function ($action, $model, $key, $index, $column) {
