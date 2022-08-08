@@ -42,9 +42,10 @@ class IncomeOrdersController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->db->createCommand("delete income_orders from income_orders left join income_order_products iop on income_orders.id = iop.order_id where iop.id is null")->execute();
+
         $searchModel = new IncomeOrdersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
