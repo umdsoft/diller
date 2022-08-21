@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+use yii\web\Request;
 
 /**
  * IncomeController implements the CRUD actions for Income model.
@@ -81,20 +82,25 @@ class IncomeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate(Request $request)
     {
         $model = new Income();
         $product = new IncomeProducts();
 
         $model->user_id = Yii::$app->user->identity->id;
-        if ($this->request->isPost && $model->load($this->request->post())) {
+        if ($request->isPost && $model->load($request->post())) {
             if ($model->save()) {
-                $modelProducts = $this->request->post('IncomeProducts');
-                foreach ($modelProducts as $modelProduct) {
-                    $product = new IncomeProducts();
-                    $product->setAttributes($modelProduct);
-                    $product->income_id = $model->id;
-                    $product->save();
+                $incomeProducts = $request->post('IncomeProducts');
+                foreach ($incomeProducts as $incomeProductItem) {
+                    $modelIncomeProduct = new IncomeProducts();
+                    $modelIncomeProduct->setAttributes($incomeProductItem);
+                    $modelIncomeProduct->income_id = $model->id;
+                    $modelProduct=Products::find()->where(['serial' => $modelIncomeProduct->serial])->one();
+                    $modelProduct->price = $modelIncomeProduct->amout;
+                    dd($modelProduct->save(),$modelProduct->errors,$modelProduct->attributes,$modelProduct::class);
+                    $modelIncomeProduct->save();
+                    if (false) {
+                    }
                 }
                 return $this->redirect(['view', 'id' => $model->id]);
             }

@@ -14,3 +14,8 @@ function dd(...$varibles)
     }
     die();
 }
+
+function asDecimal($value)
+{
+    return Yii::$app->formatter->asDecimal($value);
+}

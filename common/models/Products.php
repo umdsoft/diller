@@ -35,6 +35,7 @@ use Yii;
 class Products extends \yii\db\ActiveRecord
 {
     public $brand_name;
+
     /**
      * {@inheritdoc}
      */
@@ -49,13 +50,15 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['serial','name', 'price', 'box', 'category_id', 'brand_name','supplier_id','unit_id'], 'required'],
-            [['serial_num','serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id','unit_id','website'], 'integer'],
+            [['serial', 'name', 'price', 'box', 'category_id', 'supplier_id', 'unit_id'], 'required'],
+            [['serial_num', 'serial', 'price', 'box', 'category_id', 'brand_id', 'is_sale', 'supplier_id', 'unit_id', 'website'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['image', 'serial', 'name', 'note', 'code', 'bio','brand_name'], 'string', 'max' => 255],
+            [['image', 'serial', 'name', 'note', 'code', 'bio', 'brand_name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::className(), 'targetAttribute' => ['supplier_id' => 'id']],
             [['unit_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductUnits::className(), 'targetAttribute' => ['unit_id' => 'id']],
+            /** brand_name required when scenario create*/
+            [['brand_name'], 'required', 'on' => 'create'],
         ];
     }
 
@@ -97,18 +100,21 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
     }
 
-    public function getBrand(){
-        return $this->hasOne(Brand::className(),['id'=>'brand_id']);
+    public function getBrand()
+    {
+        return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
     }
 
-    public function slug(){
+    public function slug()
+    {
         $this->code = Transliterator::transliterate($this->name);
-        $n=0;
-        while(static::findOne(['code'=>$this->code])){
+        $n = 0;
+        while (static::findOne(['code' => $this->code])) {
             $n++;
-            $this->code = Transliterator::transliterate($this->name).'-'.$n;
+            $this->code = Transliterator::transliterate($this->name) . '-' . $n;
         }
     }
+
     /**
      * Gets query for [[IncomeProducts]].
      *
@@ -128,6 +134,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ProductImages::className(), ['product_id' => 'id']);
     }
+
     /**
      * Gets query for [[IncomeOrderProducts]].
      *
@@ -138,9 +145,11 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(IncomeOrderProducts::className(), ['product_id' => 'id']);
     }
 
-    public function getUnit(){
-        return $this->hasOne(ProductUnits::className(),['id'=>'unit_id']);
+    public function getUnit()
+    {
+        return $this->hasOne(ProductUnits::className(), ['id' => 'unit_id']);
     }
+
     /**
      * Gets query for [[Supplier]].
      *
