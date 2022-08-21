@@ -4,6 +4,7 @@ namespace frontend\modules\cp\controllers;
 
 use common\models\Income;
 use common\models\IncomeProducts;
+use common\models\Model;
 use common\models\Products;
 use common\models\search\IncomeSearch;
 use common\models\Suppliers;
@@ -11,6 +12,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+use yii\web\Request;
+
 /**
  * IncomeController implements the CRUD actions for Income model.
  */
@@ -59,16 +62,18 @@ class IncomeController extends Controller
     public function actionView($id)
     {
         $suppliers = Suppliers::find()->select(['suppliers.*'])
-            ->innerJoin('products p','suppliers.id = p.supplier_id')
-            ->where('p.id in (select product_id from income_products where income_id='.$id.')')
-            ->groupBy('suppliers.id')->orderBy(['count(p.id)'=>SORT_DESC])->all();
-        ;
+            ->innerJoin('products p', 'suppliers.id = p.supplier_id')
+            ->where('p.id in (select product_id from income_products where income_id=' . $id . ')')
+            ->groupBy('suppliers.id')->orderBy(['count(p.id)' => SORT_DESC])->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'suppliers' => $suppliers,
         ]);
     }
 
-    public function actionGetserial($id){
+    public function actionGetserial($id)
+    {
         return @Products::findOne($id)->serial;
     }
 
@@ -77,17 +82,23 @@ class IncomeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate(Request $request)
     {
         $model = new Income();
         $product = new IncomeProducts();
+
         $model->user_id = Yii::$app->user->identity->id;
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                echo "<pre>";
-                var_dump(Yii::$app->request->post());
-                exit;
-                $model->save();
+        if ($request->isPost && $model->load($request->post())) {
+            if ($model->save()) {
+                $incomeProducts = $request->post('IncomeProducts');
+                foreach ($incomeProducts as $incomeProductItem) {
+                    $modelIncomeProduct = new IncomeProducts();
+                    $modelIncomeProduct->setAttributes($incomeProductItem);
+                    $modelIncomeProduct->income_id = $model->id;
+                    $modelProduct = Products::find()->where(['serial' => $modelIncomeProduct->serial])->one();
+                    $modelProduct->price = $modelIncomeProduct->amout;
+                    $modelIncomeProduct->save();
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -96,15 +107,18 @@ class IncomeController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'product'=>$product
+            'product' => $product
         ]);
     }
 
-    public function actionNewproducts($key=2){
+    public
+    function actionNewproducts($key = 2)
+    {
 
-        return $this->renderAjax('_gen',['key'=>$key]);
+        return $this->renderAjax('_gen', ['key' => $key]);
 
     }
+
     /**
      * Updates an existing Income model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -112,7 +126,8 @@ class IncomeController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public
+    function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -132,7 +147,8 @@ class IncomeController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public
+    function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
@@ -146,7 +162,8 @@ class IncomeController extends Controller
      * @return Income the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected
+    function findModel($id)
     {
         if (($model = Income::findOne(['id' => $id])) !== null) {
             return $model;
