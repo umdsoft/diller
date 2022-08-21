@@ -95,12 +95,9 @@ class IncomeController extends Controller
                     $modelIncomeProduct = new IncomeProducts();
                     $modelIncomeProduct->setAttributes($incomeProductItem);
                     $modelIncomeProduct->income_id = $model->id;
-                    $modelProduct=Products::find()->where(['serial' => $modelIncomeProduct->serial])->one();
+                    $modelProduct = Products::find()->where(['serial' => $modelIncomeProduct->serial])->one();
                     $modelProduct->price = $modelIncomeProduct->amout;
-                    dd($modelProduct->save(),$modelProduct->errors,$modelProduct->attributes,$modelProduct::class);
                     $modelIncomeProduct->save();
-                    if (false) {
-                    }
                 }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
