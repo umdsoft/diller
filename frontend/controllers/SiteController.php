@@ -36,6 +36,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
+                        'actions' => ['index', 'signup'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -49,12 +50,14 @@ class SiteController extends Controller
             ],
         ];
     }
+
     public function beforeAction($action)
     {
-        if(Yii::$app->user->identity->role_id!=6){
-            header('Location:'.Yii::$app->urlManager->createUrl([Yii::$app->user->identity->role->url]));
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->role_id != 6) {
+            header('Location:' . Yii::$app->urlManager->createUrl([Yii::$app->user->identity->role->url]));
             exit;
         }
+        return parent::beforeAction($action);
     }
 
     /**
@@ -222,8 +225,8 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {
