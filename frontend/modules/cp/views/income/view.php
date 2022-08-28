@@ -15,19 +15,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-
-                        <p>
-                            <?= Html::a('O`zgartirish', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                            <?= Html::a('O`chirish', ['delete', 'id' => $model->id], [
-                                'class' => 'btn btn-danger',
-                                'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
-                                    'method' => 'post',
-                                ],
-                            ]) ?>
-                        </p>
-
+                    <div class="card-body row" >
+                        <div class="col-12" id="dontprint">
+                                <?= Html::a('O`zgartirish', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                                <?= Html::a('O`chirish', ['delete', 'id' => $model->id], [
+                                    'class' => 'btn btn-danger',
+                                    'data' => [
+                                        'confirm' => 'Are you sure you want to delete this item?',
+                                        'method' => 'post',
+                                    ],
+                                ]) ?>
+                            <button class="btn btn-info printbtn"><span class="fa fa-print"></span> Pechatga chiqarish
+                            </button>
+                        </div>
 
                         <div class="row" id="print">
                             <h3 style="color: #000; font-weight: bold; text-align: center">Kirim qilingan mahsulotlar
