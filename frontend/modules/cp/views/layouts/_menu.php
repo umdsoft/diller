@@ -17,7 +17,7 @@
 
                 <li class="menu-title" data-key="t-apps">Bo'limlar</li>
                 <li>
-                    <a href="#">
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/sale/index'])?>">
                         <i data-feather="dollar-sign"></i>
                         <span data-key="t-chat">Savdo</span>
                     </a>
@@ -80,12 +80,14 @@
                                 <span data-key="t-chat">Omborxonalar</span>
                             </a>
                         </li>
+                        <?php if(false){?>
                         <li>
                             <a href="<?= Yii::$app->urlManager->createUrl(['/cp/branches/index'])?>">
                                 <i data-feather="users"></i>
                                 <span data-key="t-chat">Filaillar</span>
                             </a>
                         </li>
+                        <?php }?>
                         <li>
                             <a href="<?= Yii::$app->urlManager->createUrl(['/cp/supplier'])?>">
                                 <i data-feather="bar-chart"></i>

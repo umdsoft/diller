@@ -55,6 +55,7 @@ class ClientSubjects extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'alt_name', 'address', 'lan', 'lng', 'phone', 'director', 'inn', 'oked', 'nds_number', 'referent_point'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 50],
+            [['phone'],'unique'],
             [['note'], 'string', 'max' => 500],
             [['district_id'], 'exist', 'skipOnError' => true, 'targetClass' => LocDistrict::className(), 'targetAttribute' => ['district_id' => 'id']],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientGroups::className(), 'targetAttribute' => ['group_id' => 'id']],
