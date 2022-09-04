@@ -17,10 +17,23 @@
 
                 <li class="menu-title" data-key="t-apps">Bo'limlar</li>
                 <li>
-                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/sale/index'])?>">
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/sale/create'])?>">
                         <i data-feather="dollar-sign"></i>
-                        <span data-key="t-chat">Savdo</span>
+                        <span data-key="t-chat">Sotuv</span>
                     </a>
+                </li>
+                <li>
+                    <a href="#" class="arrow-down">
+                        <i data-feather="pie-chart"></i>
+                        <span data-key="t-ecommerce">Sotuv</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/sale'])?>"><i data-feather="user"></i> Sotuvlar</a></li>
+                        <?php foreach (\common\models\Payed::find()->all() as $item):?>
+                            <li><a href="<?= Yii::$app->urlManager->createUrl(['/cp/sale','payed'=>$item->id])?>"><i data-feather="dollar-sign"></i> <?= $item->name?></a></li>
+                        <?php endforeach;?>
+
+                    </ul>
                 </li>
                 <li>
                     <a href="<?= Yii::$app->urlManager->createUrl(['/cp/income-orders'])?>">

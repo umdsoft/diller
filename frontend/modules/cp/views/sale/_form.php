@@ -14,6 +14,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
+        <div class="col-md-12">
+            <?= $form->field($client, 'type_id')->radioList(\yii\helpers\ArrayHelper::map(\common\models\ClientTypes::find()->all(),'id','name')) ?>
+        </div>
         <div class="col-md-6">
             <?= $form->field($client, 'phone')->textInput(['type'=>'number']) ?>
             <ul class="list-group" id="livesearch"></ul>
@@ -35,7 +38,7 @@ use yii\widgets\ActiveForm;
                         <td>Soni</td>
                         <td>Koropkalar soni</td>
                         <td>Narxi</td>
-                        <td>Sotilish narxi</td>
+                        <td>Umumiy narx</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,10 +59,10 @@ use yii\widgets\ActiveForm;
                             <?= $form->field($product,'[1]box')->textInput()->label(false)?>
                         </td>
                         <td>
-                            <?= $form->field($product,'[1]price')->textInput()->label(false)?>
+                            <?= $form->field($product,'[1]price')->textInput(['disabled'=>true])->label(false)?>
                         </td>
                         <td>
-                            <?= $form->field($product,'[1]amout')->textInput()->label(false)?>
+                            <?= $form->field($product,'[1]amout')->textInput(['disabled'=>true])->label(false)?>
                         </td>
                         <td>
                             <button  onclick="remover(1)"  type="button" class="btn btn-danger remover"><span class="fa fa-trash"></span></button>
@@ -97,7 +100,6 @@ $get_client_fullphone = Yii::$app->urlManager->createUrl(['/cp/sale/getclientful
 $get_client_fullname = Yii::$app->urlManager->createUrl(['/cp/sale/getclientfullname']);
 $this->registerJs("
     $(document).ready(function(){
-            
             $('#clientsubjects-phone').keyup(function(){
                 $('#livesearch').html('');
                 

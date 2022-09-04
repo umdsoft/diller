@@ -111,13 +111,48 @@ class SaleController extends Controller
         $client = new ClientSubjects();
         $model->operator_id =  Yii::$app->user->identity->id;
         $product = new SaleProducts();
-        /*if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }*/
+        $client->type_id = 1;
+        $client->district_id = 0;
+        $client->group_id = 0;
+        if($this->request->isPost){
+
+           if($client->load($this->request->post())){
+               if($cl = ClientSubjects::findOne(['phone'=>$client->phone])){
+                   $model->client_subject_id = $cl->id;
+                   $cl->updated_at = date('Y-m-d h:i:s');
+                   $cl->save();
+               }else{
+                   $client->alt_name = $client->name;
+                   $client->save();
+               }
+               $model->client_subject_id = $client->id;
+               $model->total_price = 0;
+               $model->paid = 0;
+               $model->operator_id = Yii::$app->user->id;
+               $model->type_id = 1;
+               $model->status_id = 7;
+               $model->branch_id = Yii::$app->user->identity->branch_id;
+               if($model->save()){
+                   $total = 0;
+                   $pros = $this->request->post('SaleProducts');
+
+                   foreach ($pros as $item){
+                      $pro = new SaleProducts();
+                      $pro->setAttributes($item);
+                      $pro->sale_id = $model->id;
+                      $pro->total = (intval($pro->count)+(intval($pro->box) * intval($pro->product->box))) * $pro->product->price;
+                      $pro->total = "{$pro->total}";
+                      $total += $pro->total;
+                      $pro->save();
+                   }
+                   $model->total_price = $total;
+                   $model->save();
+               }
+               return $this->redirect(['view', 'id' => $model->id]);
+           }
+
+        }
+
 
         return $this->render('create', [
             'model' => $model,

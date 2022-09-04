@@ -36,14 +36,14 @@
     <td>
         <div class="form-group field-saleproducts-<?= $key?>-price">
 
-            <input type="text" id="saleproducts-<?= $key?>-price" class="form-control" name="SaleProducts[<?= $key?>][price]">
+            <input type="text" disabled id="saleproducts-<?= $key?>-price" class="form-control" name="SaleProducts[<?= $key?>][price]">
 
         </div>
     </td>
     <td>
         <div class="form-group field-saleproducts-<?= $key?>-amout">
 
-            <input type="text" id="saleproducts-<?= $key?>-amout" class="form-control" name="SaleProducts[<?= $key?>][amout]">
+            <input type="text" disabled id="saleproducts-<?= $key?>-amout" class="form-control" name="SaleProducts[<?= $key?>][amout]">
 
         </div>
     </td>
